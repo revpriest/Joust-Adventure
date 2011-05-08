@@ -1,0 +1,20 @@
+A game. Which plays like Joust.
+
+Phase one: A spectrum-joust-a-like, you vs some AI bots, 
+           four or so on a screen at once, whoever has the
+           highest dagger wins.
+
+Phase two: Multi-player. The other players in the game are
+           others sat at home, if they use the right password
+           then in the same game as a friend.
+
+           Maybe there's a 'talk' mode.
+
+Phase Three: Joust Adventure.
+           We add a scrolly map, which means you're now in
+           co-operative mode. Team up with friends to fight
+           the evil-joust-bird menace. And it's like a 
+           scrolly joust-em-up.
+
+Phase four plus:
+           New adventures, coz we now have 'levels' after all.
