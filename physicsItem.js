@@ -23,30 +23,18 @@ PhysicsItem.prototype.init = function(name,px,py){
     }
     this.dx=0;
     this.dy=0;
+    this.graphicsOffsetX=0;
+    this.graphicsOffsetY=0;
     this.name=name;
-    this.div = this.addToDiv(this);
 }
 
 
-/*******************************
-* Method for adding to the game Div
+/*************************************************8
+* Sometimes the graphic isn't initialized properly.
+* We'll try again with this bit
 */
-PhysicsItem.prototype.addToDiv = function (physicsItem){
-  gameDiv = document.getElementById("gameDiv");
-  if(!gameDiv){return false;}
-  newDiv = document.createElement("div");
-  newDiv.style.overflow = "hidden";
-  newDiv.style.zIndex = 11;
-  newDiv.className="gameElement";
-  newDiv.innerHTML = "";
-  this.halfWidth = 20;
-  this.halfHeight = 20;
-  newDiv.physicsItem = physicsItem;
-  newDiv.style.position = "absolute";
-  newDiv.style.top = "-20000px";
-  newDiv.style.left ="-20000px";
-  gameDiv.appendChild(newDiv);
-  return newDiv;
+PhysicsItem.prototype.initGraphic = function(){
+   this.graphic = document.getElementById("playerFaceLeft");
 }
 
 
@@ -85,9 +73,9 @@ PhysicsItem.prototype.doInertia = function(){
       this.y+=this.dy;
       this.x+=this.dx;
     }
-    if(this.x>mapWidth-500-this.halfWidth){this.x=mapWidth-500-this.halfWidth;}
-    if(this.x<=this.halfWidth){this.x=this.halfWidth;}
-    if(this.y>mapHeight-500-this.halfHeight){this.y=mapHeight-500-this.halfHeight;}
+    if(this.x>mapWidth-500-this.halfWidth){this.dx=-this.dx}
+    if(this.x<=this.halfWidth){this.x=this.halfWidth;this.dx=-this.dx;}
+    if(this.y>mapHeight-500-this.halfHeight){this.y=mapHeight-500-this.halfHeight;this.dy=-this.dy}
     if(this.y<=this.halfHeight){this.y=this.halfHeight;}
   }
 }
@@ -238,7 +226,7 @@ PhysicsItem.prototype.getMortalPhysicsItemAt = function(x,y){
 */
 PhysicsItem.prototype.die = function(){
   this.dying = 30;
-  this.div.innerHTML = " X ";
+  this.graphic=document.getElementById("splat");
 }
 
 
@@ -276,43 +264,30 @@ PhysicsItem.prototype.doFaceDirection = function(){
        ((this.dx<0)&&(this.direction!=this.faceDirectionLeft))){
        if(this.deadlyPoint){this.deadlyPoint.x=-this.deadlyPoint.x;}
           this.faceDirection=this.faceDirectionLeft;
-          this.div.innerHTML = this.faceLeftHTML;
+          this.graphic=this.faceLeftGraphic;
     }else if((this.dx>0)&&(this.direction!=this.faceDirectionRight)){
        if(this.deadlyPoint){this.deadlyPoint.x=-this.deadlyPoint.x;}
          this.faceDirection=this.faceDirectionRight;
-          this.div.innerHTML = this.faceRightHTML;
+          this.graphic=this.faceRightGraphic;
     }
   }
 }
 
 
-/*******************************
-* Method for updating the div's
-* position on screen. Room for
-* some optimisation here I'd think,
-* only updating the div if it's
-* actually changed.
+/**************************************
+* Method to move the item, ensure it's
+* actually doing it's thing.
 */
 PhysicsItem.prototype.updatePosition = function(){
   this.doSelfControl();
   this.fallUnderGravity();
   //Turn around?
-  if(this.faceLeftHTML){
+  if(this.faceLeftGraphic){
     this.doFaceDirection();
   }
   this.doInertia();
   if(this.deadlyPoint){
     this.killTip();
-  }
-  if(this.graphicsOffsetY){
-    this.div.style.top = (this.y-this.halfHeight-this.graphicsOffsetY-cameraY)+"px";
-  }else{
-    this.div.style.top = (this.y-this.halfHeight-cameraY)+"px";
-  }
-  if(this.graphicsOffsetX){
-    this.div.style.left = (this.x-this.halfWidth-this.graphicsOffsetX-cameraX)+"px";
-  }else{
-    this.div.style.left = (this.x-this.halfWidth-cameraX)+"px";
   }
 }
 

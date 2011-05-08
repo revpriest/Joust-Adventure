@@ -9,11 +9,10 @@ function PlayerItem(name,x,y,keyMap){
   this.graphicsOffsetX = 30;
   this.graphicsOffsetY = 0;
   this.deadlyPoint= {x:60,y:7}
-  this.faceLeftHTML = "<img src=\"images/birdb-left.png\">";
-  this.faceRightHTML = "<img src=\"images/birdb-right.png\">";
+  this.faceLeftGraphic = document.getElementById("playerFaceLeft");
+  this.faceRightGraphic = document.getElementById("playerFaceRight") ;
   this.faceDirection = 0;
   this.mortal = true;
-  this.div.className+=" player";
   this.keyMap = keyMap;
 }
 PlayerItem.prototype = new PhysicsItem();

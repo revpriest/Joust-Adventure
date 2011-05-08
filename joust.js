@@ -7,7 +7,6 @@
 var timer=null;
 var physicsItems=[];
 var keyMap = [];
-var gameDiv = document.getElementById("gameDiv");
 var cameraX=200;
 var cameraY=10;
 var mapHeight=2000;
@@ -42,9 +41,8 @@ function updateCamera(){
     if(cameraY<0){cameraY=0;}
     if(cameraY>mapHeight-1000){cameraY=mapHeight-1000}
   }
-  
-  var e = document.getElementById('gameBackground');
-  e.style.backgroundPosition="-"+(cameraX>>1)+"px -"+(cameraY>>1)+"px";
+  drawBackground(cameraX/2,cameraY/2);
+  drawItems();
 }
 
 
@@ -62,7 +60,6 @@ function runGame(){
      if(item.dying){
        item.dying--;
        if(item.dying==1){
-         gameDiv.removeChild(item.div);
          delete physicsItems[i];
        }
     }
@@ -94,9 +91,9 @@ keyUpHandler = function(e){
 * Setup the game
 */
 function startGame(){
-//  for(n=0;n<5;n++){
-//    physicsItems['mapBlock'+n] = new MapBlock("mapBlock"+n,Math.floor(Math.random()*5000),Math.floor(Math.random()*5000),180,30,"");
-//  }
+  for(n=0;n<50;n++){
+    physicsItems['mapBlock'+n] = new MapBlock("mapBlock"+n,Math.floor(Math.random()*5000),Math.floor(Math.random()*5000),180,30);
+  }
   physicsItems['player'] = new PlayerItem("player",250,250,keyMap);
   physicsItems['ai'+1] = new AiItem("ai"+1);
   physicsItems['ai'+2] = new AiItem("ai"+2);
@@ -104,6 +101,9 @@ function startGame(){
   physicsItems['ai'+4] = new AiItem("ai"+4);
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
+  initCanvas();
+  var x = document.getElementById("loading");
+  x.innerHTML="Joust Adventures";
   timer = setInterval("runGame()",50);
   return true;
 }

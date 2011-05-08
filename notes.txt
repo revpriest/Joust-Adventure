@@ -18,3 +18,14 @@ Phase Three: Joust Adventure.
 
 Phase four plus:
            New adventures, coz we now have 'levels' after all.
+
+-----------------
+
+Current Bugs:
+
+*) Collision. We can only hit one thing at a time,
+   so walking along a block (and so colliding with
+   it's top) prevents us from being blocked by
+   a block we walk into.
+
+

@@ -9,12 +9,11 @@ function AiItem(name,x,y){
   this.graphicsOffsetX = 40;
   this.graphicsOffsetY = 0;
   this.deadlyPoint= {x:60,y:7}
-  this.faceLeftHTML = "<img src=\"images/bird-left.png\">";
-  this.faceRightHTML = "<img src=\"images/bird-right.png\">";
+  this.faceLeftGraphic = document.getElementById("aiFaceLeft");
+  this.faceRightGraphic = document.getElementById("aiFaceRight") ;
   this.faceDirection = 0;
   this.mortal = true;
   this.dx = Math.floor(Math.random(6)-3);
-  this.div.className+=" ai";
   this.burn = 1
 }
 AiItem.prototype = new PhysicsItem();
