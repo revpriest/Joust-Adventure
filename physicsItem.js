@@ -62,14 +62,7 @@ PhysicsItem.prototype.doInertia = function(){
     // index0 = true/false, was there a collision?
     // index1 = distance to the collision point
     // index2,3 = position of the collision point.
-    collisionPoint = this.collisionPointWithAllObjects();
-    if(collisionPoint.collides){
-      if(collisionPoint.type=="b"){this.dy=-this.dy;}
-      else if(collisionPoint.type=="t"){this.dy=0;}
-      else if((collisionPoint.type=="l")||(collisionPoint.type=="r")){this.dx=-this.dx;}
-      this.x = collisionPoint.x;
-      this.y = collisionPoint.y;
-    }else{
+    if(!this.collisionPointWithAllObjects()){
       this.y+=this.dy;
       this.x+=this.dx;
     }
@@ -93,19 +86,24 @@ PhysicsItem.prototype.doInertia = function(){
 *   .physicsItem = which thing it collides with.
 */
 PhysicsItem.prototype.collisionPointWithAllObjects = function(){
-  closestPoint = {collides:false, distance: 10000};
+  hitSomething = false;
   for (var i in physicsItems) {
     var item = physicsItems[i];
     if((item!=this)&&(item.solid)){
       comparePoint = item.intersectsLine(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight);
       if(comparePoint.collides==true){
-        if(comparePoint.distance<closestPoint.distance){
-          closestPoint = comparePoint;
+        if(comparePoint.collides){
+          hitSomething=true;
+          if(comparePoint.type=="b"){this.dy=-this.dy;}
+          else if(comparePoint.type=="t"){this.dy=0;}
+          else if((comparePoint.type=="l")||(comparePoint.type=="r")){this.dx=-this.dx;}
+          this.x = comparePoint.x;
+          this.y = comparePoint.y;
         }
       }
     }
   }
-  return closestPoint;
+  return hitSomething;
 }
 
 
