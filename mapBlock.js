@@ -9,7 +9,7 @@ function MapBlock(name,x,y,w,h){
   this.graphic = document.getElementById("mapBlock");
 }
 MapBlock.prototype = new PhysicsItem();
-MapBlock.prototype.solid=true;
+MapBlock.prototype.solidTop = true;
 
 /***********************************************
 * Map blocks do not fall, they just hang there.

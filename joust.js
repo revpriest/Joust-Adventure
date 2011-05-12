@@ -11,6 +11,10 @@ var cameraX=200;
 var cameraY=10;
 var mapHeight=2000;
 var mapWidth=4096;
+var showCollision=true;
+var screenWidth=800;
+var screenHeight=500;
+var player=null;
 
 /**********************************************
 * Print something for debugging.
@@ -37,9 +41,9 @@ function updateCamera(){
     cameraX=p.x-250;
     cameraY=p.y-250;
     if(cameraX<0){cameraX=0;}
-    if(cameraX>mapWidth-1000){cameraX=mapWidth-1000;}
+    if(cameraX>mapWidth-screenWidth-screenWidth){cameraX=mapWidth-screenWidth-screenWidth;}
     if(cameraY<0){cameraY=0;}
-    if(cameraY>mapHeight-1000){cameraY=mapHeight-1000}
+    if(cameraY>mapHeight-screenHeight-screenHeight){cameraY=mapHeight-screenHeight-screenHeight}
   }
   drawBackground(cameraX/2,cameraY/2);
   drawItems();
@@ -65,6 +69,9 @@ function runGame(){
     }
   }
   updateCamera();
+  if(showCollision){
+    showCollisionLines();
+  }
 }
 
 
@@ -81,6 +88,9 @@ keyDownHandler = function(e){
   if(e.which==27){
     nextTimeAlert=true;
   }
+  if(e.which==67){
+    showCollision=!showCollision;
+  }
 }
 keyUpHandler = function(e){
   keyMap[e.which]=false;
@@ -92,13 +102,18 @@ keyUpHandler = function(e){
 */
 function startGame(){
   for(n=0;n<50;n++){
-    physicsItems['mapBlock'+n] = new MapBlock("mapBlock"+n,Math.floor(Math.random()*5000),Math.floor(Math.random()*5000),180,30);
+    physicsItems['mapBlock'+n] = new MapBlock("mapBlock"+n,Math.floor(Math.random()*4000),Math.floor(Math.random()*1514),180,30);
   }
-  physicsItems['player'] = new PlayerItem("player",250,250,keyMap);
+  physicsItems['mapFloor'] = new MapBlock("mapFloor",2000,1514,4000,30);
   physicsItems['ai'+1] = new AiItem("ai"+1);
-  physicsItems['ai'+2] = new AiItem("ai"+2);
-  physicsItems['ai'+3] = new AiItem("ai"+3);
-  physicsItems['ai'+4] = new AiItem("ai"+4);
+  physicsItems['parrot'+1] = new ParrotItem("parrot"+1,250,100);
+  physicsItems['parrot'+2] = new ParrotItem("parrot"+2);
+  physicsItems['parrot'+3] = new ParrotItem("parrot"+3);
+  physicsItems['parrot'+4] = new ParrotItem("parrot"+4);
+  for(n=0;n<5;n++){
+    physicsItems['lance'+n] = new LanceItem("lance"+n,Math.floor(Math.random()*4000),1400,keyMap);
+  }
+  player = physicsItems['player'] = new PlayerItem("player",100,1400,keyMap);
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
   initCanvas();

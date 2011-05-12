@@ -9,14 +9,15 @@ function PhysicsItem(px,py){
 PhysicsItem.prototype.gravityConstant = 2;
 PhysicsItem.prototype.faceDirectionLeft = 1;
 PhysicsItem.prototype.faceDirectionRight = 2;
+PhysicsItem.maxObjInt = 1;
 
 /************************************************
 * Initialization
 */
 PhysicsItem.prototype.init = function(name,px,py){
     if(px==null){
-      this.x=Math.floor(Math.random()*500);
-      this.y=Math.floor(Math.random()*500);
+      this.x=Math.floor(Math.random()*5000);
+      this.y=Math.floor(Math.random()*5000);
     }else{
       this.x=px;
       this.y=py;
@@ -26,7 +27,21 @@ PhysicsItem.prototype.init = function(name,px,py){
     this.graphicsOffsetX=0;
     this.graphicsOffsetY=0;
     this.name=name;
+    return this;
 }
+
+
+
+
+/******************************************************
+* Add an item to the tracker array
+*/
+PhysicsItem.prototype.addItem = function(x){
+  physicsItems[this.maxObjInt++]=x;
+}
+
+
+
 
 
 /*************************************************8
@@ -53,7 +68,7 @@ PhysicsItem.prototype.fallUnderGravity = function(){
 PhysicsItem.prototype.doInertia = function(){
   //Limit by air resistance I guess?
   if(this.dx<-10){this.dx=-10;} if(this.dx>10){this.dx=10;}
-  if(this.dy<-10){this.dy=-10;} if(this.dy>10){this.dy=10;}
+  if(this.dy<-30){this.dy=-30;} if(this.dy>20){this.dy=20;}
 
   //If it's moving, move it!
   if((this.dx!=0)||(this.dy!=0)){
@@ -62,13 +77,11 @@ PhysicsItem.prototype.doInertia = function(){
     // index0 = true/false, was there a collision?
     // index1 = distance to the collision point
     // index2,3 = position of the collision point.
-    if(!this.collisionPointWithAllObjects()){
-      this.y+=this.dy;
-      this.x+=this.dx;
-    }
-    if(this.x>mapWidth-500-this.halfWidth){this.dx=-this.dx}
+    this.y+=this.dy;
+    this.x+=this.dx;
+    if(this.x>mapWidth-screenHeight-this.halfWidth){this.dx=-this.dx}
     if(this.x<=this.halfWidth){this.x=this.halfWidth;this.dx=-this.dx;}
-    if(this.y>mapHeight-500-this.halfHeight){this.y=mapHeight-500-this.halfHeight;this.dy=-this.dy}
+    if(this.y>mapHeight-screenHeight-this.halfHeight){this.y=mapHeight-screenHeight-this.halfHeight;this.dy=-this.dy}
     if(this.y<=this.halfHeight){this.y=this.halfHeight;}
   }
 }
@@ -85,20 +98,28 @@ PhysicsItem.prototype.doInertia = function(){
 *   .distance = distance to collision
 *   .physicsItem = which thing it collides with.
 */
-PhysicsItem.prototype.collisionPointWithAllObjects = function(){
+PhysicsItem.prototype.doCollisionDetection = function(){
   hitSomething = false;
+  this.collisionLeft=this.collisionRight=this.collisionTop=this.collisionBottom=null;
   for (var i in physicsItems) {
     var item = physicsItems[i];
-    if((item!=this)&&(item.solid)){
-      comparePoint = item.intersectsLine(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight);
-      if(comparePoint.collides==true){
-        if(comparePoint.collides){
+    if((item!=this)&&(item.solidTop||item.solidBottom||item.solidLeft||item.solidRight)){
+      if(item.mightCross(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight)){    
+        if((item.solidTop)&&(item.crossesTop(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight))){
+          this.collisionBottom=item;
           hitSomething=true;
-          if(comparePoint.type=="b"){this.dy=-this.dy;}
-          else if(comparePoint.type=="t"){this.dy=0;}
-          else if((comparePoint.type=="l")||(comparePoint.type=="r")){this.dx=-this.dx;}
-          this.x = comparePoint.x;
-          this.y = comparePoint.y;
+        }
+        if((item.solidBottom)&&(item.crossesBottom(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight))){
+          this.collisionTop=item;
+          hitSomething=true;
+        }
+        if((item.solidLeft)&&(item.crossesLeft(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight))){
+          this.collisionRight=item;
+          hitSomething=true;
+        }
+        if((item.solidRight)&&(item.crossesRight(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight))){
+          this.collisionLeft=item;
+          hitSomething=true;
         }
       }
     }
@@ -109,57 +130,57 @@ PhysicsItem.prototype.collisionPointWithAllObjects = function(){
 
 
 /****************************************************
-* We have a moving object. All moving objects are
-* cicrles, for now at least. We wanna see if that
-* moving circle will hit the rectangle that this
-* object represents. If not, return a collision
-* object with collides.false. 
-*
-* If so, work out where the circle will be to just
-* touch this square, and return a collision object
-* with collides.true and .x,.y giving the point where
-* the circle meets the box.
-*
-* We CAN assume the box isn't rotated, for now
-* at least.
+* Collision Detection - given a line, is it likely
+* to cross this item's collision square?
 */
-PhysicsItem.prototype.intersectsLine = function(x1,y1,xv,yv,xsize,ysize){
+PhysicsItem.prototype.mightCross = function(x1,y1,xv,yv,xsize,ysize){
   if((xv==0)&&(yv==0)){return {collides:false}}  //Not moving, can't collide.
-  if((x1+xsize<this.x-this.halfWidth) &&(x1+xv+xsize<this.x-this.halfWidth)){return {collides:false}};  //Line left of box.
-  if((x1-xsize>this.x+this.halfWidth) &&(x1+xv-xsize>this.x+this.halfWidth)){return {collides:false}};  //Line right of box.
-  if((y1+ysize<this.y-this.halfHeight)&&(y1+yv+ysize<this.y-this.halfHeight)){return {collides:false}}; //Line above box.
-  if((y1-ysize>this.y+this.halfHeight)&&(y1+yv-ysize>this.y+this.halfHeight)){return {collides:false}}; //Line below box.
+  if((x1+xsize<this.x-this.halfWidth) &&(x1+xv+xsize<this.x-this.halfWidth)){return  false};  //Line left of box.
+  if((x1-xsize>this.x+this.halfWidth) &&(x1+xv-xsize>this.x+this.halfWidth)){return  false};  //Line right of box.
+  if((y1+ysize<this.y-this.halfHeight)&&(y1+yv+ysize<this.y-this.halfHeight)){return false}; //Line above box.
+  if((y1-ysize>this.y+this.halfHeight)&&(y1+yv-ysize>this.y+this.halfHeight)){return false}; //Line below box.
+  return true;
+}
 
-  //Four lines in the box to check for collision with the moving circle...
+/****************************************************
+* Collision Detection - given a line, does it
+* cross the edge of this collision square?
+*/
+PhysicsItem.prototype.crossesLeft= function(x1,y1,xv,yv,xsize,ysize){
   if(xv>0){
-    //Left: y=this.x-this.halfWidth;
     vertLine = this.x-this.halfWidth;
     if((x1<vertLine)&&(x1+xv+xsize>vertLine)){
-      return {collides:true,distance:yv,x:vertLine-ysize,y:y1+yv,physicsItem:this,type:'l'};
+      return true;
     }
   }
+  return false;
+}
+PhysicsItem.prototype.crossesRight= function(x1,y1,xv,yv,xsize,ysize){
   if(xv<0){
-    //Right: y=this.x+this.halfWidth;
     vertLine = this.x+this.halfWidth;
     if((x1>vertLine)&&(x1+xv-xsize<vertLine)){
-      return {collides:true,distance:yv,x:vertLine+xsize,y:y1+yv,physicsItem:this,type:'r'};
+      return true;
     }
   }
+  return false;
+}
+PhysicsItem.prototype.crossesTop= function(x1,y1,xv,yv,xsize,ysize){
   if(yv>0){
-    //Top: x=this.y-this.halfHeight;
     horizLine = this.y-this.halfHeight;
     if((y1<horizLine)&&(y1+yv+ysize>horizLine)){
-      return {collides:true,distance:xv,x:x1+xv,y:horizLine-ysize,physicsItem:this,type:'t'};
+      return true;
     }
   }
+  return false;
+}
+PhysicsItem.prototype.crossesBottom= function(x1,y1,xv,yv,xsize,ysize){
   if(yv<0){
-    //Bottom: x=this.y+this.halfHeight;
     horizLine = this.y+this.halfHeight;
     if((y1>horizLine)&&(y1+yv-ysize<horizLine)){
-      return {collides:true,distance:xv,x:x1+xv,y:horizLine+ysize,physicsItem:this,type:'b'};
+      return true;
     }
   }
-  return {collides:false};
+  return false;
 }
 
 
@@ -191,32 +212,86 @@ PhysicsItem.prototype.containsPoint = function(x,y){
 }
 
 
+/****************************************************
+* Does this item intersect with the given box?
+*/
+PhysicsItem.prototype.intersectsDeadlyBox = function(item){
+  var x1=item.x+item.deadlyBox.x1;
+  var x2=item.x+item.deadlyBox.x2;
+  var y1=item.y+item.deadlyBox.y1;
+  var y2=item.y+item.deadlyBox.y2;
+  if(x2<x1){t=x1;x1=x2;x2=t;}
+  if(y2<y1){t=y1;y1=y2;y2=t;}
+  if(this.x+this.halfWidth<x1){return false;}
+  if(this.x-this.halfWidth>x2){return false;}
+  if(this.y+this.halfHeight<y1){return false;}
+  if(this.y-this.halfHeight>y2){return false;}
+  return true;
+}
+
 
 /****************************************************
-* Get the object at a given point. Not 'self', obviously
+* Does this item intersect with me?
 */
-PhysicsItem.prototype.getPhysicsItemAt = function(x,y){
+PhysicsItem.prototype.intersects = function(item){
+  var x1=item.x-item.halfWidth;
+  var x2=item.x+item.halfWidth;
+  var y1=item.y-item.halfHeight;
+  var y2=item.y-item.halfHeight;
+  if(this.x+this.halfWidth<x1){return false;}
+  if(this.x-this.halfWidth>x2){return false;}
+  if(this.y+this.halfHeight<y1){return false;}
+  if(this.y-this.halfHeight>y2){return false;}
+  return true;
+}
+
+
+
+
+
+/****************************************************
+* Get the object which is currently being killed by
+* the deadly box for this item. Obviously that's
+* only items which are moral and inside the deadlybox
+* for this item.
+*/
+PhysicsItem.prototype.getItemKilled = function(){
+  if(this.dying){return null;}
   for (var i in physicsItems) {
     var item = physicsItems[i];
-    if((item!=this)&&(item.containsPoint(x,y))){
+    if((item!=this.flying)&&(item!=this)&&(item.mortal)&&(!item.dying)&&(item.intersectsDeadlyBox(this))){
       return item;
     }
   }
+  return null;
 }
 
 /****************************************************
-* Get the object at a given point, but only if it's
-* mortal.
+* Get any collectable item under this item.
 */
-PhysicsItem.prototype.getMortalPhysicsItemAt = function(x,y){
+PhysicsItem.prototype.getTouchedCollectable = function(){
+  if(this.dying){return null;}
   for (var i in physicsItems) {
     var item = physicsItems[i];
-    if((item!=this)&&(item.mortal)&&(item.containsPoint(x,y))){
+    if((item!=this)&&(item.collectable)&&(!item.dying)&&(item.intersects(this))){
       return item;
     }
   }
+  return null;
 }
-
+/****************************************************
+* Get any flyable item under this item.
+*/
+PhysicsItem.prototype.getTouchedFlyable = function(){
+  if(this.dying){return null;}
+  for (var i in physicsItems) {
+    var item = physicsItems[i];
+    if((item!=this)&&(item.flyable)&&(!item.dying)&&(item.intersects(this))){
+      return item;
+    }
+  }
+  return null;
+}
 
 
 /**************************************************
@@ -234,17 +309,19 @@ PhysicsItem.prototype.die = function(){
 */
 PhysicsItem.prototype.killTip = function(){
   if(this.dying){return;}
-  killedItem = this.getMortalPhysicsItemAt(this.x+this.deadlyPoint.x,this.y+this.deadlyPoint.y);
-  if(killedItem){
-    //Maybe it's close? Maybe they have a weapon too?
-    if(killedItem.deadlyPoint){
-      if(killedItem.getPhysicsItemAt(killedItem.x+killedItem.deadlyPoint.x,killedItem.y+killedItem.deadlyPoint.y)==this){
-        if(this.y+this.deadlyPoint.y<killedItem.y+killedItem.deadlyPoint.y){
-          killedItem.die();
-        }
-      }
-    }else{
+  killedItem = this.getItemKilled();
+  if(killedItem!=null){
+    if((!killedItem.deadlyBox)||(!killedItem.intersectsDeadlyBox(this))){
       killedItem.die();
+    }else{
+      //Ahha, it's a stand-off, they're killing each other.
+      //We give it to whoever has the highest deadlybox.
+      if((((killedItem.deadlyBox.y2+killedItem.deadlyBox.y1)/2)+killedItem.y)>
+         (((this.deadlyBox.y2+this.deadlyBox.y1)/2)+this.y)){
+         killedItem.die();
+      }else{
+        //Well, the other deadlybox will kill this soon enough. Do nothing.
+      }
     }
   }
 }
@@ -256,17 +333,22 @@ PhysicsItem.prototype.killTip = function(){
 * it's actually moving, and changes the image when
 * it's pointing a different way
 */
-PhysicsItem.prototype.doFaceDirection = function(){
+PhysicsItem.prototype.doAnimation = function(){
+  if(!this.faceLeftGraphic){return;}    //Unanimated.
   if(!this.dying){
-    if((this.faceDirection==null)||(this.faceDirection==0)||
-       ((this.dx<0)&&(this.direction!=this.faceDirectionLeft))){
-       if(this.deadlyPoint){this.deadlyPoint.x=-this.deadlyPoint.x;}
-          this.faceDirection=this.faceDirectionLeft;
-          this.graphic=this.faceLeftGraphic;
-    }else if((this.dx>0)&&(this.direction!=this.faceDirectionRight)){
-       if(this.deadlyPoint){this.deadlyPoint.x=-this.deadlyPoint.x;}
-         this.faceDirection=this.faceDirectionRight;
-          this.graphic=this.faceRightGraphic;
+    if((this.faceDirection==null)||(this.faceDirection==0)||(this.dx<0)){
+       this.faceDirection=this.faceDirectionLeft;
+       this.graphic=this.faceLeftGraphic;
+    }else if(this.dx>0){
+       this.faceDirection=this.faceDirectionRight;
+       this.graphic=this.faceRightGraphic;
+    }
+  }
+  if(this.oldFaceDirection!=this.faceDirection){
+    this.oldFaceDirection=this.faceDirection;
+    if(this.deadlyBox){
+        this.deadlyBox.x1=-this.deadlyBox.x1;
+        this.deadlyBox.x2=-this.deadlyBox.x2;
     }
   }
 }
@@ -277,14 +359,12 @@ PhysicsItem.prototype.doFaceDirection = function(){
 * actually doing it's thing.
 */
 PhysicsItem.prototype.updatePosition = function(){
+  this.doCollisionDetection();
+  this.doAnimation();
+  this.doInertia();
   this.doSelfControl();
   this.fallUnderGravity();
-  //Turn around?
-  if(this.faceLeftGraphic){
-    this.doFaceDirection();
-  }
-  this.doInertia();
-  if(this.deadlyPoint){
+  if(this.deadlyBox){
     this.killTip();
   }
 }

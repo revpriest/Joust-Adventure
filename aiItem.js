@@ -4,11 +4,11 @@
 
 function AiItem(name,x,y){
   this.init(name,x,y);
-  this.halfWidth = 32;
+  this.halfWidth = 20;
   this.halfHeight = 40;
-  this.graphicsOffsetX = 40;
+  this.graphicsOffsetX = 46;
   this.graphicsOffsetY = 0;
-  this.deadlyPoint= {x:60,y:7}
+  this.deadlyBox= {x1:60,y1:-6,x2:0,y2:-9}
   this.faceLeftGraphic = document.getElementById("aiFaceLeft");
   this.faceRightGraphic = document.getElementById("aiFaceRight") ;
   this.faceDirection = 0;
@@ -21,12 +21,14 @@ AiItem.prototype.faceDirectionLeft = 1;
 AiItem.prototype.faceDirectionRight = 2;
 
 AiItem.prototype.doSelfControl = function(){
-  if(Math.floor(Math.random()*5)==1){
-    this.burn=!this.burn;
+  if(Math.floor(Math.random()*6)<1){
+    this.burn=1;
+  }else{
+    this.burn=0;
   }
   if(this.burn){
     if(!this.dying){
-      this.dy-=4;
+      this.dy=-10; 
     }
   }
 }
