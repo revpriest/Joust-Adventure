@@ -35,6 +35,7 @@ ParrotItem.prototype.faceDirectionRight = 2;
 */
 ParrotItem.prototype.doSelfControl = function(){
   if(this.pilot == null){
+    this.mortal = true;
     if(Math.floor(Math.random()*6)<1){
       this.burn=1;
     }else{
@@ -47,6 +48,7 @@ ParrotItem.prototype.doSelfControl = function(){
     }
   }else{
     this.dying=undefined;  //Immortal when mounted!
+    this.mortal = false;
   }
 }
 

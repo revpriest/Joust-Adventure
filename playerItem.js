@@ -19,6 +19,7 @@ function PlayerItem(name,x,y,keyMap){
   this.flying=null;
   this.keyMap = keyMap;
   this.gotLance = false;
+  this.noQuittingJump=1;
 }
 PlayerItem.prototype = new PhysicsItem();
 PlayerItem.prototype.keyDown = 40;
@@ -97,6 +98,13 @@ PlayerItem.prototype.doAnimation = function(){
 * Player movement, including moving anything he's flying
 */
 PlayerItem.prototype.doSelfControl = function(){
+
+  //If this 'player' is an AI, then do the AI!
+  if(typeof this.doAi == 'function') {
+    this.doAi();
+  }
+
+  //Then get on with stuff.
   if(!this.dying){
     //Collect a bird to fly?
     if(this.flying==null){
@@ -114,7 +122,6 @@ PlayerItem.prototype.doSelfControl = function(){
       //Oh, already flying! Collect a lance maybe?
       var collectableItem = this.getTouchedCollectable();
       if(collectableItem){
-        debugPrint("Picked Up:"+collectableItem.name);
         collectableItem.die();
         this.gotLance = true;
         if(this.faceDirection==this.faceDirectionRight){
@@ -153,8 +160,11 @@ PlayerItem.prototype.doSelfControl = function(){
           this.dy=-30; 
         }
       }else{
-        if(this.dy<0){
-          this.dy=0;
+        if(this.noQuittingJump--<=0){
+          this.noQuittingJump=0;
+          if(this.dy<0){
+            this.dy=0;
+          }
         }
       }
       if(this.keyMap[this.keyLeft]){
@@ -187,6 +197,8 @@ PlayerItem.prototype.doSelfControl = function(){
     //Ditch a bird?
     if(this.flying&&this.keyMap[this.keyDown]){
       this.ditchBird();
+      this.dy=-30;
+      this.noQuittingJump=10;
     }
 
   }

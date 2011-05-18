@@ -9,12 +9,76 @@ var physicsItems=[];
 var keyMap = [];
 var cameraX=200;
 var cameraY=10;
-var mapHeight=2000;
-var mapWidth=4096;
+var mapHeight=120*64;
+var mapWidth=32*64;
 var showCollision=true;
 var screenWidth=800;
 var screenHeight=500;
 var player=null;
+
+var map = ("xxxxxxxxxxxxxxx",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "x             x",
+           "xxxxxxxxxxxxxxx");
+
+
 
 /**********************************************
 * Print something for debugging.
@@ -30,32 +94,26 @@ function debugAppend(s){
 
 
 
-/**************************************
-* The camera looks out over the game,
-* usually following the object called
-* 'player'
+/************************************************************
+* The camera looks out over the game, usually following 
+* the object called 'player'
 */
 function updateCamera(){
-  var p=null
-  if(p=physicsItems['player']){
-    cameraX=p.x-250;
-    cameraY=p.y-250;
-    if(cameraX<0){cameraX=0;}
-    if(cameraX>mapWidth-screenWidth-screenWidth){cameraX=mapWidth-screenWidth-screenWidth;}
-    if(cameraY<0){cameraY=0;}
-    if(cameraY>mapHeight-screenHeight-screenHeight){cameraY=mapHeight-screenHeight-screenHeight}
-  }
+  cameraX=player.x-screenWidth/2;
+  cameraY=player.y-screenHeight/2;
+  if(cameraX<0){cameraX=0;}
+  if(cameraX>mapWidth-screenWidth-screenWidth){cameraX=mapWidth-screenWidth-screenWidth;}
+  if(cameraY<0){cameraY=0;}
+  if(cameraY>mapHeight-screenHeight-screenHeight){cameraY=mapHeight-screenHeight-screenHeight}
   drawBackground(cameraX/2,cameraY/2);
   drawItems();
 }
 
 
 
-/*******************************
-* Run Game does one game tick.
-* If it's falling behind 20 
-* time a second, we're gonna be
-* slow. So keep the code FAST.
+/***********************************************************
+* Run Game does one game tick. If it's falling behind 20 
+* time a second, we're gonna be slow. So keep the code FAST.
 */
 function runGame(){
   for (var i in physicsItems) {
@@ -101,19 +159,14 @@ keyUpHandler = function(e){
 * Setup the game
 */
 function startGame(){
-  for(n=0;n<50;n++){
-    physicsItems['mapBlock'+n] = new MapBlock("mapBlock"+n,Math.floor(Math.random()*4000),Math.floor(Math.random()*1514),180,30);
-  }
-  physicsItems['mapFloor'] = new MapBlock("mapFloor",2000,1514,4000,30);
+  physicsItems['mapFloor'] = new MapBlock("mapFloor",16*64,113*64-22,33*64,64);
   physicsItems['ai'+1] = new AiItem("ai"+1);
   physicsItems['parrot'+1] = new ParrotItem("parrot"+1,250,100);
-  physicsItems['parrot'+2] = new ParrotItem("parrot"+2);
-  physicsItems['parrot'+3] = new ParrotItem("parrot"+3);
-  physicsItems['parrot'+4] = new ParrotItem("parrot"+4);
   for(n=0;n<5;n++){
     physicsItems['lance'+n] = new LanceItem("lance"+n,Math.floor(Math.random()*4000),1400,keyMap);
   }
-  player = physicsItems['player'] = new PlayerItem("player",100,1400,keyMap);
+  physicsItems['meanie'+1] = new MeanieItem("meanie"+1,140,1400);
+  player = physicsItems['player'] = new PlayerItem("player",64,110*64,keyMap);
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
   initCanvas();

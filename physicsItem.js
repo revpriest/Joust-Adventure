@@ -79,7 +79,7 @@ PhysicsItem.prototype.doInertia = function(){
     // index2,3 = position of the collision point.
     this.y+=this.dy;
     this.x+=this.dx;
-    if(this.x>mapWidth-screenHeight-this.halfWidth){this.dx=-this.dx}
+    if(this.x>mapWidth-screenWidth-this.halfWidth){this.dx=-this.dx}
     if(this.x<=this.halfWidth){this.x=this.halfWidth;this.dx=-this.dx;}
     if(this.y>mapHeight-screenHeight-this.halfHeight){this.y=mapHeight-screenHeight-this.halfHeight;this.dy=-this.dy}
     if(this.y<=this.halfHeight){this.y=this.halfHeight;}
@@ -286,12 +286,45 @@ PhysicsItem.prototype.getTouchedFlyable = function(){
   if(this.dying){return null;}
   for (var i in physicsItems) {
     var item = physicsItems[i];
-    if((item!=this)&&(item.flyable)&&(!item.dying)&&(item.intersects(this))){
+    if((item!=this)&&(item.flyable)&&(!item.dying)&&(item.intersects(this))&&(item.pilot==null)){
       return item;
     }
   }
   return null;
 }
+
+
+/******************************************************
+* Calculate the distance from here to some other object
+*/
+PhysicsItem.prototype.distanceTo = function(item){
+  var x=item.x-this.x;
+  var y=item.y-this.y;
+  return Math.sqrt((x*x)+(y*y));
+}
+
+
+/************************************************
+* Find the closest thing which satisfies some
+* function
+*/
+PhysicsItem.prototype.findClosestX = function(f){
+  soughtItem=null;
+  closestDist = 100000000000000;
+  for (var i in physicsItems) {
+    var item = physicsItems[i];
+    if(item!=this){
+      if(f(item)){
+        if((d=this.distanceTo(item))<closestDist){
+          soughtItem = item;
+          closestDist = d;
+        }
+      }
+    }
+  }
+  return soughtItem;
+}
+
 
 
 /**************************************************
