@@ -10,73 +10,138 @@ var keyMap = [];
 var cameraX=200;
 var cameraY=10;
 var mapHeight=120*64;
+var mapHeightBlocks = mapHeight/64;
 var mapWidth=32*64;
+var mapWidthBlocks = mapWidth/64;
 var showCollision=true;
 var screenWidth=800;
 var screenHeight=500;
 var player=null;
+var maxObjInt = 1;
 
-var map = ("xxxxxxxxxxxxxxx",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "x             x",
-           "xxxxxxxxxxxxxxx");
+var map = new Array
+          ("________________________________",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]                              [",
+           "]   x                          [",
+           "]    x                         [",
+           "]     x                        [",
+           "]      x                       [",
+           "]       x                      [",
+           "]        x                     [",
+           "]         x                    [",
+           "]        x                     [",
+           "]       x                      [",
+           "]      x                       [",
+           "]     x                        [",
+           "]    x                         [",
+           "]   x                          [",
+           "]  x                           [",
+           "]   x                          [",
+           "]    x                         [",
+           "]     x                        [",
+           "]      x                       [",
+           "]       x                      [",
+           "]        x                     [",
+           "]         x                    [",
+           "]        x                     [",
+           "]       x                      [",
+           "]      x                       [",
+           "]     x                        [",
+           "]    x                         [",
+           "]   x                          [",
+           "]  x                           [",
+           "]   x                          [",
+           "]    x                         [",
+           "]     x                        [",
+           "]      x                       [",
+           "]       x                      [",
+           "]        x                     [",
+           "]         x                    [",
+           "]        x                     [",
+           "]       x                      [",
+           "]      x                       [",
+           "]     x                        [",
+           "]    x                         [",
+           "]   x                          [",
+           "]  x                           [",
+           "]                              [",
+           "]  x                           [",
+           "]   x                          [",
+           "]    x                         [",
+           "]     x                        [",
+           "]      x                       [",
+           "]       x                      [",
+           "]        x                     [",
+           "]       x                      [",
+           "]      x                       [",
+           "]     x                        [",
+           "]    x                         [",
+           "]   x                          [",
+           "]  x         x                 [",
+           "]           x                  [",
+           "]x         x                   [",
+           "]         x                    [",
+           "]^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[",
+           "]                              [",
+           "]  Secret area.                [",
+           "]  I actually have no idea     [",
+           "]  why this bit is here.       [",
+           "]  120 blocks should be down   [",
+           "]  at the bottom, but appears  [",
+           "]  to be 8 blocks higher or    [",
+           "]  something. It's most odd.   [",
+           "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
 
 
@@ -93,6 +158,12 @@ function debugAppend(s){
 }
 
 
+/******************************************************
+* Add an item to the tracker array
+*/
+addPhysicsItem = function(x){
+  physicsItems[this.maxObjInt++]=x;
+}
 
 /************************************************************
 * The camera looks out over the game, usually following 
@@ -155,6 +226,59 @@ keyUpHandler = function(e){
 }
 
 
+
+
+/**************************************************
+* Which map-block is at a given location?
+*/
+function getMapBlockAt(x,y){
+  var row = y>>6;
+  var col = x>>6;
+  if(((col>=0)&&(col<(mapWidthBlocks)))&&
+     ((row>=0)&&(row<(mapHeightBlocks)))){
+    return map[row].charAt(col);
+  }
+  return " ";
+}
+
+
+/**********************************************************
+* Fill from map. Fill the entire area around an object
+* with blocks from the map. That is, create all the objects
+* that are within a screen's width of the current position
+*/
+function fillFromMap(p){
+  var n=0;
+  for(var y=p.y-screenHeight;y<p.y+screenHeight;y+=64){
+    for(var x=p.x-screenWidth;x<p.x+screenWidth;x+=64){
+      var block = getMapBlockAt(x,y);
+      if(block!=" "){
+        px = Math.floor(x)&0xffffffc;
+        py = Math.floor(y)&0xffffffc;
+        switch(block){
+          case 'x': 
+             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"x"));
+             break;
+          case '^': 
+             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"t"));
+             break;
+          case '_': 
+             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"b"));
+             break;
+          case ']': 
+             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"r"));
+             break;
+          case ']': 
+             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"l"));
+             break;
+        }
+      }
+    }
+  }
+}
+
+
+
 /*******************************
 * Setup the game
 */
@@ -166,7 +290,8 @@ function startGame(){
     physicsItems['lance'+n] = new LanceItem("lance"+n,Math.floor(Math.random()*4000),1400,keyMap);
   }
   physicsItems['meanie'+1] = new MeanieItem("meanie"+1,140,1400);
-  player = physicsItems['player'] = new PlayerItem("player",64,110*64,keyMap);
+  player = physicsItems['player'] = new PlayerItem("player",128,110*64,keyMap);
+  fillFromMap(player);
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
   initCanvas();

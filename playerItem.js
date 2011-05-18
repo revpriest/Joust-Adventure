@@ -222,7 +222,7 @@ PhysicsItem.prototype.ditchBird = function(){
    this.graphicsOffsetY = 0;
    if(this.gotLance){
      this.gotLance=false;
-     this.addItem(new LanceItem("lance"+n,this.x,this.y))
+     addPhysicsItem(new LanceItem("lance"+this.maxObjInt,this.x,this.y))
      this.deadlyBox=undefined;
    }
 }

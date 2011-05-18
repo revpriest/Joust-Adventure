@@ -2,14 +2,28 @@
 * The Map Block just hangs there, defying gravity.
 */
 
-function MapBlock(name,x,y,w,h){
+function MapBlock(name,x,y,w,h,collision){
   this.init(name,x,y);
   this.halfWidth = w/2;
   this.halfHeight = h/2;
   this.graphic = document.getElementById("mapBlock");
+  if(collision=="t"){
+    this.solidTop = true;
+  }else if(collision=="b"){
+    this.solidBottom = true;
+  }else if(collision=="r"){
+    this.solidRight = true;
+  }else if(collision=="l"){
+    this.solidLeft = true;
+  }else if(collision=="x"){
+    this.solidTop = true;
+    this.solidBottom = true;
+    this.solidLeft = true;
+    this.solidRight = true;
+  }
+  
 }
 MapBlock.prototype = new PhysicsItem();
-MapBlock.prototype.solidTop = true;
 
 /***********************************************
 * Map blocks do not fall, they just hang there.

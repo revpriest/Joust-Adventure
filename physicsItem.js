@@ -9,7 +9,6 @@ function PhysicsItem(px,py){
 PhysicsItem.prototype.gravityConstant = 2;
 PhysicsItem.prototype.faceDirectionLeft = 1;
 PhysicsItem.prototype.faceDirectionRight = 2;
-PhysicsItem.maxObjInt = 1;
 
 /************************************************
 * Initialization
@@ -32,13 +31,6 @@ PhysicsItem.prototype.init = function(name,px,py){
 
 
 
-
-/******************************************************
-* Add an item to the tracker array
-*/
-PhysicsItem.prototype.addItem = function(x){
-  physicsItems[this.maxObjInt++]=x;
-}
 
 
 
