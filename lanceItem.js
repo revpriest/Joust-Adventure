@@ -21,3 +21,12 @@ LanceItem.prototype.die = function(){
   this.dying = 2;
 }
 
+
+
+LanceItem.prototype.doSelfControl = function(){
+    //Collision Stuff.
+    if(this.collisionBottom!=null){
+       this.dy=-this.dy;
+       this.y = this.collisionBottom.y-this.collisionBottom.halfHeight-this.halfHeight;
+    }
+}

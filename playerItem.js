@@ -114,7 +114,7 @@ PlayerItem.prototype.doSelfControl = function(){
         flyableItem.pilot = this;
         this.halfWidth = 35
         this.halfHeight = 49;
-        this.graphicsOffsetX = -3;
+        this.graphicsOffsetX = 0;
         this.graphicsOffsetY = 0;
         this.faceDirection = flyableItem.faceDirection;
       }
@@ -125,9 +125,9 @@ PlayerItem.prototype.doSelfControl = function(){
         collectableItem.die();
         this.gotLance = true;
         if(this.faceDirection==this.faceDirectionRight){
-          this.deadlyBox = {x1:0,y1:-5,x2:100,y2:0}
+          this.deadlyBox = {x1:0,y1:-1,x2:100,y2:4}
         }else{
-          this.deadlyBox = {x1:0,y1:-5,x2:-100,y2:0}
+          this.deadlyBox = {x1:0,y1:-1,x2:-100,y2:4}
         }
       }
     }
@@ -136,6 +136,7 @@ PlayerItem.prototype.doSelfControl = function(){
     //Collision Stuff.
     if(this.collisionTop!=null){
        this.dy=-this.dy;
+       this.y = this.collisionTop.y+this.collisionTop.halfHeight+this.halfHeight;
     }
     if(this.collisionBottom!=null){
        this.dy=0;
@@ -177,7 +178,8 @@ PlayerItem.prototype.doSelfControl = function(){
       //Flying movement
       if(this.keyMap[this.keyUp]){
         this.burn=true;
-        this.dy=-10; 
+        this.dy-=3;
+        if(this.dy<-10){this.dy=-10;} 
       }else{
         this.burn=false;
       }
@@ -188,8 +190,8 @@ PlayerItem.prototype.doSelfControl = function(){
         this.dx+=2;
       }
       this.flying.x=this.x;
-      this.flying.dx=this.dx;
-      this.flying.y=this.y+13;
+      this.flying.dx=0;
+      this.flying.y=this.y+5;
       this.flying.dy=10;
       this.flying.faceDirection = this.faceDirection;
     }
@@ -222,7 +224,7 @@ PhysicsItem.prototype.ditchBird = function(){
    this.graphicsOffsetY = 0;
    if(this.gotLance){
      this.gotLance=false;
-     addPhysicsItem(new LanceItem("lance"+this.maxObjInt,this.x,this.y))
+     addPhysicsItem(null,new LanceItem("lance"+this.maxObjInt,this.x,this.y))
      this.deadlyBox=undefined;
    }
 }

@@ -93,7 +93,7 @@ PhysicsItem.prototype.doInertia = function(){
 PhysicsItem.prototype.doCollisionDetection = function(){
   hitSomething = false;
   this.collisionLeft=this.collisionRight=this.collisionTop=this.collisionBottom=null;
-  for (var i in physicsItems) {
+  for (var i in physicsItems){
     var item = physicsItems[i];
     if((item!=this)&&(item.solidTop||item.solidBottom||item.solidLeft||item.solidRight)){
       if(item.mightCross(this.x,this.y,this.dx,this.dy,this.halfWidth,this.halfHeight)){    
@@ -249,7 +249,7 @@ PhysicsItem.prototype.intersects = function(item){
 */
 PhysicsItem.prototype.getItemKilled = function(){
   if(this.dying){return null;}
-  for (var i in physicsItems) {
+  for (var i in physicsItems){
     var item = physicsItems[i];
     if((item!=this.flying)&&(item!=this)&&(item.mortal)&&(!item.dying)&&(item.intersectsDeadlyBox(this))){
       return item;
@@ -263,7 +263,7 @@ PhysicsItem.prototype.getItemKilled = function(){
 */
 PhysicsItem.prototype.getTouchedCollectable = function(){
   if(this.dying){return null;}
-  for (var i in physicsItems) {
+  for (var i in physicsItems){
     var item = physicsItems[i];
     if((item!=this)&&(item.collectable)&&(!item.dying)&&(item.intersects(this))){
       return item;
@@ -276,7 +276,7 @@ PhysicsItem.prototype.getTouchedCollectable = function(){
 */
 PhysicsItem.prototype.getTouchedFlyable = function(){
   if(this.dying){return null;}
-  for (var i in physicsItems) {
+  for (var i in physicsItems){
     var item = physicsItems[i];
     if((item!=this)&&(item.flyable)&&(!item.dying)&&(item.intersects(this))&&(item.pilot==null)){
       return item;
@@ -303,7 +303,7 @@ PhysicsItem.prototype.distanceTo = function(item){
 PhysicsItem.prototype.findClosestX = function(f){
   soughtItem=null;
   closestDist = 100000000000000;
-  for (var i in physicsItems) {
+  for (var i in physicsItems){
     var item = physicsItems[i];
     if(item!=this){
       if(f(item)){
@@ -336,7 +336,7 @@ PhysicsItem.prototype.killTip = function(){
   if(this.dying){return;}
   killedItem = this.getItemKilled();
   if(killedItem!=null){
-    if((!killedItem.deadlyBox)||(!killedItem.intersectsDeadlyBox(this))){
+    if((!killedItem.deadlyBox)||(!this.intersectsDeadlyBox(killedItem))){
       killedItem.die();
     }else{
       //Ahha, it's a stand-off, they're killing each other.

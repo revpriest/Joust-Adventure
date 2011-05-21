@@ -1,34 +1,7 @@
-A game. Which plays like Joust.
+Next up:
 
-Phase one: A spectrum-joust-a-like, you vs some AI bots, 
-           four or so on a screen at once, whoever has the
-           highest dagger wins.
+Map edges!
 
-Phase two: Multi-player. The other players in the game are
-           others sat at home, if they use the right password
-           then in the same game as a friend.
+Make it add objects as we scroll 'em into view.
 
-           Maybe there's a 'talk' mode.
-
-Phase Three: Joust Adventure.
-           We add a scrolly map, which means you're now in
-           co-operative mode. Team up with friends to fight
-           the evil-joust-bird menace. And it's like a 
-           scrolly joust-em-up.
-
-Phase four plus:
-           New adventures, coz we now have 'levels' after all.
-
------------------
-
-
-
-
-Current Bugs:
-
-*) Collision. We can only hit one thing at a time,
-   so walking along a block (and so colliding with
-   it's top) prevents us from being blocked by
-   a block we walk into.
-
-
+Make it remove 'em as they scroll off

@@ -6,15 +6,27 @@ function MapBlock(name,x,y,w,h,collision){
   this.init(name,x,y);
   this.halfWidth = w/2;
   this.halfHeight = h/2;
+  this.background=true;
   this.graphic = document.getElementById("mapBlock");
-  if(collision=="t"){
+  if(collision=="^"){
     this.solidTop = true;
-  }else if(collision=="b"){
+  }else if(collision=="_"){
     this.solidBottom = true;
-  }else if(collision=="r"){
+  }else if(collision=="]"){
     this.solidRight = true;
-  }else if(collision=="l"){
+  }else if(collision=="["){
     this.solidLeft = true;
+  }else if(collision=="z"){
+    this.solidTop = true;
+    this.solidBottom = true;
+  }else if(collision=="<"){
+    this.solidTop = true;
+    this.solidBottom = true;
+    this.solidLeft = true;
+  }else if(collision==">"){
+    this.solidTop = true;
+    this.solidBottom = true;
+    this.solidRight = true;
   }else if(collision=="x"){
     this.solidTop = true;
     this.solidBottom = true;

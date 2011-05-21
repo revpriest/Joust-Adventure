@@ -2,7 +2,7 @@
 * The Player is obviously a type of PhysicsItem.
 */
 
-function ParrotItem(name,x,y){
+function ParrotItem(name,x,y,direction){
   this.init(name,x,y);
   this.halfWidth = 30;
   this.halfHeight = 35;
@@ -17,10 +17,14 @@ function ParrotItem(name,x,y){
   this.walkFramesRW = [document.getElementById("ParrotStandingW"),document.getElementById("ParrotWalk1W"),document.getElementById("ParrotStandingW"),document.getElementById("ParrotWalk2W")];
   this.flyFramesLW = [document.getElementById("ParrotFly1LW"),document.getElementById("ParrotFly2LW"),document.getElementById("ParrotFly3LW")];
   this.walkFramesLW = [document.getElementById("ParrotStandingLW"),document.getElementById("ParrotWalk1LW"),document.getElementById("ParrotStandingLW"),document.getElementById("ParrotWalk2LW")];
-  this.faceDirection = 2;
   this.mortal = true;
   this.flyable = true;
-  this.dx = Math.floor(Math.random(6)-3);
+  this.faceDirection = direction;
+  if(direction==1){
+    this.dx = -1-Math.floor(Math.random()*3);
+  }else{
+    this.dx = 1+Math.floor(Math.random()*3);
+  }
   this.burn = 1
   this.delayFrames=1;
   this.pilot = null; 
@@ -34,6 +38,14 @@ ParrotItem.prototype.faceDirectionRight = 2;
 * Move around. Jump up, jump up, and get down.
 */
 ParrotItem.prototype.doSelfControl = function(){
+  if(this.sleeping){
+    if(this.collisionBottom!=null){
+       this.dx=0;
+       this.dy=0;
+       this.y = this.collisionBottom.y-this.collisionBottom.halfHeight-this.halfHeight;
+    }
+    return;
+  }
   if(this.pilot == null){
     this.mortal = true;
     if(Math.floor(Math.random()*6)<1){

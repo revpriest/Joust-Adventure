@@ -3,7 +3,7 @@
 * the AI here instead of by actual key-presses.
 */
 
-function MeanieItem(name,x,y){
+function MeanieItem(name,x,y,direction){
   this.init(name,x,y);
   this.halfWidth = 25;
   this.halfHeight = 30;
@@ -15,11 +15,11 @@ function MeanieItem(name,x,y){
   this.animFrame=1;
   this.walkAnimFrames =  [document.getElementById("SilverbackWalk1") ,document.getElementById("SilverbackWalk2") ,document.getElementById("SilverbackWalk3") ,document.getElementById("SilverbackWalk4") ];
   this.walkAnimFramesL = [document.getElementById("SilverbackWalk1L"),document.getElementById("SilverbackWalk2L"),document.getElementById("SilverbackWalk3L"),document.getElementById("SilverbackWalk4L")];
-  this.faceDirection = 1;
   this.mortal = true;
   this.flying=null;
   this.gotLance = false;
   this.noQuittingJump=1;
+  this.faceDirection = direction;
   this.keyMap = [];
 }
 MeanieItem.prototype = new PlayerItem();
@@ -32,12 +32,19 @@ MeanieItem.prototype = new PlayerItem();
 */
 MeanieItem.prototype.doAi = function(){
   var soughtItem = null;
+  if(this.sleeping){
+    var dist = this.distanceTo(physicsItems['player']);
+    if(dist<360){
+      this.sleeping=false;
+    }
+    return;
+  }
 
   if(this.flying==null){
     //If we're unmounted, we want a mount!
     soughtItem = this.findClosestX(
       function(x){
-        return x.flyable;
+        return x.flyable&&(x.pilot==null);
       }
     );
   }else if(!this.gotLance){

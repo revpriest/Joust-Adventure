@@ -17,28 +17,36 @@ function initCanvas(){
 
 
 function drawItems(){
-  for (var i in physicsItems) {
+  for (var i in physicsItems){
     var item = physicsItems[i];
-    drawItem(item)
+    if(item.background){
+      drawItem(item)
+    }
+  }
+  for (var i in physicsItems){
+    var item = physicsItems[i];
+    if(!item.background){
+      drawItem(item)
+    }
   }
 }
 
 
 function drawItem(i){
    try{
-     if(i.pilot==undefined||i.pilot!=null){     //Don't draw it if it's being ridden. We'll draw it with the rider.
+     if(i.pilot==undefined||i.pilot==null){     //Don't draw it if it's being ridden. We'll draw it with the rider.
        if(i.flying!=null){
          //If it's flying something, draw that, then this, then the wings.
+         if(i.gotLance){
+           if((i.dx<0)||((i.dx==0)&&(i.faceDirection==i.faceDirectionLeft))){
+             gameCanvasContext.drawImage(lanceLeft, i.x-cameraX-100, i.y-5-cameraY);   
+           }else{
+             gameCanvasContext.drawImage(lanceRight, i.x-cameraX-50, i.y-5-cameraY);   
+           }
+         }
          gameCanvasContext.drawImage(i.flying.graphic, 
                                      i.flying.x-i.flying.halfWidth-i.flying.graphicsOffsetX-cameraX, 
                                      i.flying.y-i.flying.halfHeight-i.flying.graphicsOffsetY-cameraY);
-         if(i.gotLance){
-           if((i.dx<0)||((i.dx==0)&&(i.faceDirection==i.faceDirectionLeft))){
-             gameCanvasContext.drawImage(lanceLeft, i.x-cameraX-100, i.y-10-cameraY);   
-           }else{
-             gameCanvasContext.drawImage(lanceRight, i.x-cameraX-50, i.y-10-cameraY);   
-           }
-         }
          gameCanvasContext.drawImage(i.graphic, i.x-i.halfWidth-i.graphicsOffsetX-cameraX, i.y-i.halfHeight-i.graphicsOffsetY-cameraY);   
          gameCanvasContext.drawImage(i.flying.wingGraphic,
                                      i.flying.x-i.flying.halfWidth-i.flying.graphicsOffsetX-cameraX, 
@@ -109,7 +117,7 @@ function showCollisionLinesForItem(i){
 
 
 function showCollisionLines(){
-  for (var i in physicsItems) {
+  for (var i in physicsItems){
     var item = physicsItems[i];
     showCollisionLinesForItem(item)
   }

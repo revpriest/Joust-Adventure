@@ -20,128 +20,127 @@ var player=null;
 var maxObjInt = 1;
 
 var map = new Array
-          ("________________________________",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]                              [",
-           "]   x                          [",
-           "]    x                         [",
-           "]     x                        [",
-           "]      x                       [",
-           "]       x                      [",
-           "]        x                     [",
-           "]         x                    [",
-           "]        x                     [",
-           "]       x                      [",
-           "]      x                       [",
-           "]     x                        [",
-           "]    x                         [",
-           "]   x                          [",
-           "]  x                           [",
-           "]   x                          [",
-           "]    x                         [",
-           "]     x                        [",
-           "]      x                       [",
-           "]       x                      [",
-           "]        x                     [",
-           "]         x                    [",
-           "]        x                     [",
-           "]       x                      [",
-           "]      x                       [",
-           "]     x                        [",
-           "]    x                         [",
-           "]   x                          [",
-           "]  x                           [",
-           "]   x                          [",
-           "]    x                         [",
-           "]     x                        [",
-           "]      x                       [",
-           "]       x                      [",
-           "]        x                     [",
-           "]         x                    [",
-           "]        x                     [",
-           "]       x                      [",
-           "]      x                       [",
-           "]     x                        [",
-           "]    x                         [",
-           "]   x                          [",
-           "]  x                           [",
-           "]                              [",
-           "]  x                           [",
-           "]   x                          [",
-           "]    x                         [",
-           "]     x                        [",
-           "]      x                       [",
-           "]       x                      [",
-           "]        x                     [",
-           "]       x                      [",
-           "]      x                       [",
-           "]     x                        [",
-           "]    x                         [",
-           "]   x                          [",
-           "]  x         x                 [",
-           "]           x                  [",
-           "]x         x                   [",
-           "]         x                    [",
-           "]^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[",
-           "]                              [",
-           "]  Secret area.                [",
-           "]  I actually have no idea     [",
-           "]  why this bit is here.       [",
-           "]  120 blocks should be down   [",
-           "]  at the bottom, but appears  [",
-           "]  to be 8 blocks higher or    [",
-           "]  something. It's most odd.   [",
-           "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+          ("____________________",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                { [",
+           "]        <zzzzzzzz>[",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "] }                [",
+           "]<zzzzzzz>         [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]        {    {    [",
+           "]   <zzzzzzzzzz>   [",
+           "]                  [",
+           "]                  [",
+           "]         {        [",
+           "]        <zzzz>    [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]   <zzzz>         [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]        <zzz>     [",
+           "]                  [",
+           "] }                [",
+           "] <zzzz>           [",
+           "]                  [",
+           "]                  [",
+           "]         <zzz>    [",
+           "]                  [",
+           "]    }             [",
+           "]    <zzz>         [",
+           "]                  [",
+           "]                  [",
+           "]  <zzzzzzzz>      [",
+           "]                  [",
+           "]                  [",
+           "]  }   }           [",
+           "<zzzzzzzz>         [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]              {   [",
+           "]            <zzzzz[",
+           "]  <zzzz>          [",
+           "]                  [",
+           "]p                 [",
+           "]    l     <z>     [",
+           "]                  [",
+           "]^^^^^^^^^^^^^^^^^^[",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]                  [",
+           "]^^^^^^^^^^^^^^^^^^[");
 
 
 
@@ -161,8 +160,12 @@ function debugAppend(s){
 /******************************************************
 * Add an item to the tracker array
 */
-addPhysicsItem = function(x){
-  physicsItems[this.maxObjInt++]=x;
+addPhysicsItem = function(name,x){
+  if(name==null){
+    name="newItem"+(maxObjInt++);
+  }
+  physicsItems[name]=x;
+  return x;
 }
 
 /************************************************************
@@ -187,7 +190,8 @@ function updateCamera(){
 * time a second, we're gonna be slow. So keep the code FAST.
 */
 function runGame(){
-  for (var i in physicsItems) {
+  var n=0;
+  for (var i in physicsItems){
      var item = physicsItems[i];
      item.updatePosition();
      if(item.dying){
@@ -196,8 +200,14 @@ function runGame(){
          delete physicsItems[i];
        }
     }
+    n++;
   }
+//  debugPrint("Items:"+n);
+  var oldX=cameraX;
+  var oldY=cameraY;
   updateCamera();
+  addNewMapBlocks(cameraX,cameraY,oldX,oldY);
+  deleteDistantObjects(player);
   if(showCollision){
     showCollisionLines();
   }
@@ -242,40 +252,189 @@ function getMapBlockAt(x,y){
 }
 
 
+
+/***************************************************
+* Add a map block at a given location. This is what
+* determines which chars in the map correspond to 
+* which items in the game
+*
+* x = Block with all four collision edges
+* ] = Block collision edge right
+* [ = Block collision edge left
+* ^ = Block collision edge top
+* _ = Block collision edge bottom
+* z = Block with collision top and bottom
+* < = Block with collision left, top and bottom
+* > = Block with collision right, top and bottom
+* p = Parrot moving right
+* q = Parrot moving left
+* l = Lance
+* P = Parrot facing right, sleeping.
+* Q = Parrot facing left, sleeping.
+* 
+* Not done yet:
+* } = Mounted rider facing right
+* { = Mounted rider facing left
+*/
+function addMapBlock(block,x,y){
+  if(block==" "){return;}               //No block for spaces.
+  px = x>>6;
+  py = y>>6;
+  var name = "map"+px+","+py;
+  if(physicsItems[name]!=null){return;}  //it's already there
+  switch(block){
+    case 'x': 
+    case '^': 
+    case '_': 
+    case ']': 
+    case '[': 
+    case '<': 
+    case '>': 
+    case 'z': 
+       addPhysicsItem(name,new MapBlock(name,px<<6,py<<6,64,64,block));
+       break;
+    case '{':
+       var m=addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,1));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,1));
+       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,1));
+       m.sleeping=true;
+       break;
+    case '}':
+       var m = addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,2));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,2));
+       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,2));
+       m.sleeping=true;
+       break;
+       break;
+    case 'P':
+       var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
+       p.sleeping=true; 
+       break;
+    case 'Q':
+       var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
+       p.sleeping=true; 
+       break;
+    case 'p':
+       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
+       break;
+    case 'q':
+       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
+       break;
+    case 'l':
+       addPhysicsItem(name,new LanceItem(name,px<<6,py<<6,1));
+       break;
+        
+  }
+}
+
+
+
+
+
+/**********************************************************
+* Delete objects if they're too far from the camera. They'll
+* be regenerated if the map goes near their initial thing
+*/
+function deleteDistantObjects(p){
+  for (var i in physicsItems){
+     var item = physicsItems[i];
+     if(item.x<p.x-screenWidth){
+       delete physicsItems[i];
+     }else if(item.x>p.x+screenWidth){
+       delete physicsItems[i];
+     }else if(item.y<p.y-screenHeight){
+       delete physicsItems[i];
+     }else if(item.y>p.y+screenHeight){
+       delete physicsItems[i];
+     }
+  }
+  
+}
+
+
+
+
+
+
 /**********************************************************
 * Fill from map. Fill the entire area around an object
 * with blocks from the map. That is, create all the objects
 * that are within a screen's width of the current position
 */
-function fillFromMap(p){
-  var n=0;
-  for(var y=p.y-screenHeight;y<p.y+screenHeight;y+=64){
-    for(var x=p.x-screenWidth;x<p.x+screenWidth;x+=64){
+function fillFromMap(){
+  var cx=cameraX+screenWidth/2;
+  var cy=cameraY+screenHeight/2;
+  for(var y=cy-screenHeight;y<=cy+screenHeight;y+=64){
+    for(var x=cx-screenWidth;x<=cx+screenWidth;x+=64){
       var block = getMapBlockAt(x,y);
-      if(block!=" "){
-        px = Math.floor(x)&0xffffffc;
-        py = Math.floor(y)&0xffffffc;
-        switch(block){
-          case 'x': 
-             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"x"));
-             break;
-          case '^': 
-             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"t"));
-             break;
-          case '_': 
-             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"b"));
-             break;
-          case ']': 
-             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"r"));
-             break;
-          case ']': 
-             addPhysicsItem(new MapBlock("mapFloor"+maxObjInt,px,py,64,64,"l"));
-             break;
-        }
-      }
+      addMapBlock(block,x,y);
     }
   }
 }
+
+
+/*******************************************************
+* Add new blocks at the edge of the map as we move.
+* Passed the current camera pos, and the post last
+* time we ran. 
+*/
+function addNewMapBlocks(cx,cy,ox,oy){
+  cx+=screenWidth/2;
+  cy+=screenHeight/2;
+  ox+=screenWidth/2;
+  oy+=screenHeight/2;
+  bcx=cx>>6;
+  bcy=cy>>6;
+  box=ox>>6;
+  boy=oy>>6;
+  var bdx=bcx-box;
+  var bdy=bcy-boy;
+  if(bdx>0){
+    //Add a new line to the right
+    var x=cx+screenWidth/2+128;
+    for(n=0;n<2;n++){
+      for(var y=cy-screenHeight;y<cy+screenHeight;y+=64){
+        var block = getMapBlockAt(x,y);
+        addMapBlock(block,x,y);
+      }
+      x-=64;
+    }
+  }else if(bdx<0){
+    //Add a new line to the left
+    var x=cx-screenWidth/2-128;
+    for(n=0;n<2;n++){
+      for(var y=cy-screenHeight;y<cy+screenHeight;y+=64){
+        var block = getMapBlockAt(x,y);
+        addMapBlock(block,x,y);
+      }
+      x+=64;
+    } 
+  }
+  if(bdy>0){
+    //Add a new line to the bottom
+    var y=cy+screenHeight/2+128;
+    for(n=0;n<2;n++){
+      for(var x=cx-screenWidth;x<cx+screenWidth;x+=64){
+        var block = getMapBlockAt(x,y);
+        addMapBlock(block,x,y);
+      }
+      y-=64;
+    }
+  }else if(bdy<0){
+    //Add a new line to the top
+    var y=cy-screenHeight/2-128;
+    for(n=0;n<2;n++){
+      for(var x=cx-screenWidth;x<cx+screenWidth;x+=64){
+        var block = getMapBlockAt(x,y);
+        addMapBlock(block,x,y);
+      }
+      y+=64;
+    }
+  }
+}
+
+
+
 
 
 
@@ -283,15 +442,9 @@ function fillFromMap(p){
 * Setup the game
 */
 function startGame(){
-  physicsItems['mapFloor'] = new MapBlock("mapFloor",16*64,113*64-22,33*64,64);
-  physicsItems['ai'+1] = new AiItem("ai"+1);
-  physicsItems['parrot'+1] = new ParrotItem("parrot"+1,250,100);
-  for(n=0;n<5;n++){
-    physicsItems['lance'+n] = new LanceItem("lance"+n,Math.floor(Math.random()*4000),1400,keyMap);
-  }
-  physicsItems['meanie'+1] = new MeanieItem("meanie"+1,140,1400);
   player = physicsItems['player'] = new PlayerItem("player",128,110*64,keyMap);
-  fillFromMap(player);
+  updateCamera();
+  fillFromMap();
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
   initCanvas();
