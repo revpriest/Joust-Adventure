@@ -8,13 +8,15 @@ function MeanieItem(name,x,y,direction){
   this.halfWidth = 25;
   this.halfHeight = 30;
   this.graphicsOffsetX = 15;
-  this.graphicsOffsetY = 0;
-  this.faceRightGraphic = document.getElementById("SilverbackStand") ;
-  this.faceLeftGraphic = document.getElementById("SilverbackStandL");
+  this.graphicsOffsetY = 10;
+  this.faceRightGraphic = document.getElementById("BaboonStand") ;
+  this.faceLeftGraphic = document.getElementById("BaboonStandL");
+  this.faceRightJumpGraphic = document.getElementById("BaboonJump") ;
+  this.faceLeftJumpGraphic = document.getElementById("BaboonJumpL");
+  this.walkAnimFrames =  [document.getElementById("BaboonWalk1") ,document.getElementById("BaboonWalk2") ,document.getElementById("BaboonWalk3") ,document.getElementById("BaboonWalk4") ];
+  this.walkAnimFramesL = [document.getElementById("BaboonWalk1L"),document.getElementById("BaboonWalk2L"),document.getElementById("BaboonWalk3L"),document.getElementById("BaboonWalk4L")];
   this.delayFrames=0;
   this.animFrame=1;
-  this.walkAnimFrames =  [document.getElementById("SilverbackWalk1") ,document.getElementById("SilverbackWalk2") ,document.getElementById("SilverbackWalk3") ,document.getElementById("SilverbackWalk4") ];
-  this.walkAnimFramesL = [document.getElementById("SilverbackWalk1L"),document.getElementById("SilverbackWalk2L"),document.getElementById("SilverbackWalk3L"),document.getElementById("SilverbackWalk4L")];
   this.mortal = true;
   this.flying=null;
   this.gotLance = false;
@@ -60,10 +62,10 @@ MeanieItem.prototype.doAi = function(){
   }
 
   if(soughtItem!=null){
-    if(soughtItem.x<this.x){
+    if(soughtItem.x<this.x-64){
       this.keyMap[this.keyLeft]=true;
       this.keyMap[this.keyRight]=false;
-    }else{
+    }else if(soughtItem.x>this.x+64){
       this.keyMap[this.keyLeft]=false;
       this.keyMap[this.keyRight]=true;
     }

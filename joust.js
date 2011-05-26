@@ -13,134 +13,134 @@ var mapHeight=120*64;
 var mapHeightBlocks = mapHeight/64;
 var mapWidth=32*64;
 var mapWidthBlocks = mapWidth/64;
-var showCollision=true;
+var showCollision=false;
 var screenWidth=800;
 var screenHeight=500;
 var player=null;
 var maxObjInt = 1;
 
 var map = new Array
-          ("____________________",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                { [",
-           "]        <zzzzzzzz>[",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "] }                [",
-           "]<zzzzzzz>         [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]        {    {    [",
-           "]   <zzzzzzzzzz>   [",
-           "]                  [",
-           "]                  [",
-           "]         {        [",
-           "]        <zzzz>    [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]   <zzzz>         [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]        <zzz>     [",
-           "]                  [",
-           "] }                [",
-           "] <zzzz>           [",
-           "]                  [",
-           "]                  [",
-           "]         <zzz>    [",
-           "]                  [",
-           "]    }             [",
-           "]    <zzz>         [",
-           "]                  [",
-           "]                  [",
-           "]  <zzzzzzzz>      [",
-           "]                  [",
-           "]                  [",
-           "]  }   }           [",
-           "<zzzzzzzz>         [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]              {   [",
-           "]            <zzzzz[",
-           "]  <zzzz>          [",
-           "]                  [",
-           "]p                 [",
-           "]    l     <z>     [",
-           "]                  [",
-           "]^^^^^^^^^^^^^^^^^^[",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]                  [",
-           "]^^^^^^^^^^^^^^^^^^[");
+          ("                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           " }  }  }            ",
+           "<ZZZZZZZZZ>         ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           " }  }   }           ",
+           "<ZZZZZZZZZZ>        ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "            {   {   ",
+           "         <ZZZZZZZZZ>",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "       {  }         ",
+           "     <ZZZZZZ>       ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "            {   {   ",
+           "           <ZZZZZZZ>",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "  }  }              ",
+           "<ZZZZZZZ>           ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "               {    ",
+           "           <ZZZZZZZ>",
+           "                    ",
+           "                    ",
+           "                    ",
+           "      {     }       ",
+           "      <ZZZZZZ>      ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "          {         ",
+           "         <ZZZZZ>    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                 {  ",
+           "         <ZZZZZZZZ> ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "  }                 ",
+           " <ZZZZZZZ>          ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "         {    {     ",
+           "    <ZZZZZZZZZZ>    ",
+           "                    ",
+           "                    ",
+           "          {         ",
+           "         <ZZZZ>     ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "    <ZZZZ>          ",
+           "                    ",
+           "                    ",
+           "           }        ",
+           "         <ZZZ>      ",
+           "                    ",
+           "  s   s   s         ",
+           "  <ZZZZ>            ",
+           "         S          ",
+           "                    ",
+           "          <ZZZ>     ",
+           "                    ",
+           "         S          ",
+           "     <ZZZ>          ",
+           "                    ",
+           "                    ",
+           "   <ZZZZZZZZ>       ",
+           "                    ",
+           "                    ",
+           "         s          ",
+           "<ZZZZZZZZ>          ",
+           "    s               ",
+           "                 ^  ",
+           "       s         N  ",
+           "           s     N  ",
+           "                 N  ",
+           "                 N  ",
+           "       <ZZZZZ>   N  ",
+           "Q                N  ",
+           "<Z>              V  ",
+           "       l            ",
+           "ZZZZZZZZZZZZZZZZZZZZ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "                    ",
+           "ZZZZZZZZZZZZZZZZZZZZ");
 
 
 
@@ -230,6 +230,7 @@ keyDownHandler = function(e){
   if(e.which==67){
     showCollision=!showCollision;
   }
+  return false;
 }
 keyUpHandler = function(e){
   keyMap[e.which]=false;
@@ -284,44 +285,59 @@ function addMapBlock(block,x,y){
   if(physicsItems[name]!=null){return;}  //it's already there
   switch(block){
     case 'x': 
-    case '^': 
-    case '_': 
-    case ']': 
-    case '[': 
     case '<': 
+    case 'Z': 
     case '>': 
-    case 'z': 
+    case '^': 
+    case 'N': 
+    case 'V':   //Map Blocks
        addPhysicsItem(name,new MapBlock(name,px<<6,py<<6,64,64,block));
        break;
-    case '{':
+
+    case 's':   //Sentinel - Face Left
+       var m=addPhysicsItem(name,new SentinelItem(name,px<<6,py<<6,1));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,1));
+       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,1));
+       break;
+
+    case 'S':   //Sentinel - Face Right
+       var m=addPhysicsItem(name,new SentinelItem(name,px<<6,py<<6,2));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,2));
+       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,2));
+       break;
+
+    case '{': //Meanie, hard dude, facing left
        var m=addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,1));
        addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,1));
        addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,1));
        m.sleeping=true;
        break;
-    case '}':
+
+    case '}': //Meaning, hard dude, facing right.
        var m = addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,2));
        addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,2));
        addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,2));
        m.sleeping=true;
        break;
+
+    case 'p':   //A Parrot.
+       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
        break;
-    case 'P':
+    case 'q':   //A parrot
+       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
+       break;
+
+    case 'P':   //A parrot, sleeping
        var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
        p.sleeping=true; 
        break;
-    case 'Q':
+    case 'Q':   //A parrot, sleeping
        var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
        p.sleeping=true; 
        break;
-    case 'p':
-       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
-       break;
-    case 'q':
-       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
-       break;
-    case 'l':
-       addPhysicsItem(name,new LanceItem(name,px<<6,py<<6,1));
+
+    case 'l':   //A lance
+       addPhysicsItem(name,new LanceItem(name,px<<6,(py<<6)-64,1));
        break;
         
   }
@@ -338,13 +354,13 @@ function addMapBlock(block,x,y){
 function deleteDistantObjects(p){
   for (var i in physicsItems){
      var item = physicsItems[i];
-     if(item.x<p.x-screenWidth){
+     if(item.x<p.x-screenWidth*2){
        delete physicsItems[i];
-     }else if(item.x>p.x+screenWidth){
+     }else if(item.x>p.x+screenWidth*2){
        delete physicsItems[i];
-     }else if(item.y<p.y-screenHeight){
+     }else if(item.y<p.y-screenHeight*2){
        delete physicsItems[i];
-     }else if(item.y>p.y+screenHeight){
+     }else if(item.y>p.y+screenHeight*2){
        delete physicsItems[i];
      }
   }
@@ -442,9 +458,12 @@ function addNewMapBlocks(cx,cy,ox,oy){
 * Setup the game
 */
 function startGame(){
-  player = physicsItems['player'] = new PlayerItem("player",128,110*64,keyMap);
+  player = physicsItems['player'] = new PlayerItem("player",280,110*64,keyMap);
   updateCamera();
   fillFromMap();
+  document.keydown = function(){
+    alert("Key!");
+  }
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
   initCanvas();

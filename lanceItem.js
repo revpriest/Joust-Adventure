@@ -7,7 +7,7 @@ function LanceItem(name,x,y){
   this.halfWidth = 6;
   this.halfHeight = 75;
   this.graphic = document.getElementById("LanceV");
-  this.deadlyBox= {x1:-3,y1:-64,x2:+3,y2:-76}
+//  this.deadlyBox= {x1:-3,y1:-64,x2:+3,y2:-76}
 }
 LanceItem.prototype = new PhysicsItem();
 LanceItem.prototype.collectable = true;

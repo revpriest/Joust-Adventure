@@ -8,12 +8,15 @@ function PlayerItem(name,x,y,keyMap){
   this.halfHeight = 30;
   this.graphicsOffsetX = 15;
   this.graphicsOffsetY = 0;
+  this.invulnerable = 0;
   this.faceRightGraphic = document.getElementById("SilverbackStand") ;
   this.faceLeftGraphic = document.getElementById("SilverbackStandL");
-  this.delayFrames=0;
-  this.animFrame=1;
+  this.faceRightJumpGraphic = document.getElementById("SilverbackJump") ;
+  this.faceLeftJumpGraphic = document.getElementById("SilverbackJumpL");
   this.walkAnimFrames =  [document.getElementById("SilverbackWalk1") ,document.getElementById("SilverbackWalk2") ,document.getElementById("SilverbackWalk3") ,document.getElementById("SilverbackWalk4") ];
   this.walkAnimFramesL = [document.getElementById("SilverbackWalk1L"),document.getElementById("SilverbackWalk2L"),document.getElementById("SilverbackWalk3L"),document.getElementById("SilverbackWalk4L")];
+  this.delayFrames=0;
+  this.animFrame=1;
   this.faceDirection = 1;
   this.mortal = true;
   this.flying=null;
@@ -61,9 +64,9 @@ PlayerItem.prototype.doAnimation = function(){
              this.faceDirection = this.faceDirectionRight;
            }
            if(this.faceDirection == this.faceDirectionLeft){
-             this.graphic = this.faceLeftGraphic;
+             this.graphic = this.faceLeftJumpGraphic;
            }else{
-             this.graphic = this.faceRightGraphic;
+             this.graphic = this.faceRightJumpGraphic;
            }
          }
       }
@@ -98,6 +101,9 @@ PlayerItem.prototype.doAnimation = function(){
 * Player movement, including moving anything he's flying
 */
 PlayerItem.prototype.doSelfControl = function(){
+
+  this.invulnerable--;
+  if(this.invulnerable<0){this.invulnerable=0;}
 
   //If this 'player' is an AI, then do the AI!
   if(typeof this.doAi == 'function') {
@@ -216,6 +222,7 @@ PlayerItem.prototype.doSelfControl = function(){
 * lance we're carrying too
 */
 PhysicsItem.prototype.ditchBird = function(){
+   this.invulnerable=10;
    this.flying.pilot = null;
    this.flying=null;
    this.halfWidth = 25;
@@ -235,6 +242,11 @@ PhysicsItem.prototype.ditchBird = function(){
 * Oh dear, this is unforunate, i seem to be dead.
 */
 PhysicsItem.prototype.die = function(){
+  if(this.invulnerable>0){return;}
+  if(this.flying){
+    this.ditchBird();
+    return;
+  }
   this.dying = 30;
   if(this.flying!=null){
     this.flying.pilot = false;
