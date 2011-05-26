@@ -3,7 +3,6 @@
 * ends with many nice levels worth of commons hostage
 * fun.
 */
-
 var timer=null;
 var physicsItems=[];
 var keyMap = [];
@@ -124,11 +123,11 @@ var map = new Array
            "<ZZZZZZZZ>          ",
            "    s            l  ",
            "                 ^  ",
-           "       s         N  ",
+           "       S         N  ",
            "           s     N  ",
            "                 N  ",
            "                 N  ",
-           "       <ZZZZZ>   N  ",
+           "      <ZZZZZZ>   N  ",
            "lp               N  ",
            "<Z>              V  ",
            "                   Q",
@@ -181,7 +180,6 @@ function updateCamera(){
   if(cameraY>mapHeight-screenHeight-screenHeight){cameraY=mapHeight-screenHeight-screenHeight}
   drawBackground(cameraX/2,cameraY/2);
   drawItems();
-  debugPrint("Camera: "+cameraX+","+cameraY);
 }
 
 

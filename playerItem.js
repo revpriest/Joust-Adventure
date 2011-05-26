@@ -22,7 +22,7 @@ function PlayerItem(name,x,y,keyMap){
   this.flying=null;
   this.keyMap = keyMap;
   this.gotLance = false;
-  this.noQuittingJump=1;
+  this.noRemount=1;
 }
 PlayerItem.prototype = new PhysicsItem();
 PlayerItem.prototype.keyDown = 40;
@@ -151,8 +151,8 @@ PlayerItem.prototype.doSelfControl = function(){
           this.dy=-30; 
         }
       }else{
-        if(this.noQuittingJump--<=0){
-          this.noQuittingJump=0;
+        if(this.noRemount--<=0){
+          this.noRemount=0;
           if(this.dy<0){
             this.dy=0;
           }
@@ -190,7 +190,7 @@ PlayerItem.prototype.doSelfControl = function(){
     if(this.flying&&this.keyMap[this.keyDown]){
       this.ditchBird();
       this.dy=-30;
-      this.noQuittingJump=10;
+      this.noRemount=30;
     }
 
   }
@@ -205,7 +205,7 @@ PlayerItem.prototype.doSelfControl = function(){
 * Ditch the bird we're flying, and thus drop any
 * lance we're carrying too
 */
-PhysicsItem.prototype.ditchBird = function(){
+PlayerItem.prototype.ditchBird = function(){
    this.invulnerable=10;
    this.flying.pilot = null;
    this.flying=null;
@@ -223,18 +223,17 @@ PhysicsItem.prototype.ditchBird = function(){
 
 
 /**************************************************
-* Oh dear, this is unforunate, i seem to be dead.
+* Oh dear, this is unfortunate, I seem to be dead.
 */
-PhysicsItem.prototype.die = function(){
+PlayerItem.prototype.die = function(){
   if(this.invulnerable>0){return;}
   if(this.flying){
+    this.flying.die();
     this.ditchBird();
     return;
   }
-  this.dying = 30;
-  if(this.flying!=null){
-    this.flying.pilot = false;
-  }
-  this.graphic=document.getElementById("splat");
 }
+
+
+
 

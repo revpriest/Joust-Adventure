@@ -3,8 +3,8 @@
 * physics. All players, ai-bots, collectables,
 * even bullets if we add 'em, inherit from this.
 */
-function PhysicsItem(px,py){
-    this.init(px,py);
+function PhysicsItem(name,px,py){
+    this.init(name,px,py);
 }
 PhysicsItem.prototype.gravityConstant = 2;
 PhysicsItem.prototype.faceDirectionLeft = 1;
@@ -320,7 +320,7 @@ PhysicsItem.prototype.findClosestX = function(f){
 
 
 /**************************************************
-* Oh dear, this is unforunate, i seem to be dead.
+* Oh dear, this is unfortunate, I seem to be dead.
 */
 PhysicsItem.prototype.die = function(){
   this.dying = 30;
@@ -337,6 +337,7 @@ PhysicsItem.prototype.killTip = function(){
   killedItem = this.getItemKilled();
   if(killedItem!=null){
     if((!killedItem.deadlyBox)||(!this.intersectsDeadlyBox(killedItem))){
+      debugPrint("Killed Item:"+killedItem.name+":"+killedItem.die);
       killedItem.die();
     }else{
       //Ahha, it's a stand-off, they're killing each other.
@@ -406,10 +407,12 @@ PhysicsItem.prototype.doStandardCollision = function(){
     if(this.collisionBottom!=null){
        this.dy=0;
        this.y = this.collisionBottom.y-this.collisionBottom.halfHeight-this.halfHeight;
-       if((!this.keyMap[this.keyLeft])&&(!this.keyMap[this.keyRight])){
-         //Come slowly to a stop if there's no keys pressed. Floors have friction!
-         this.dx=3*this.dx/4;
-         if(Math.abs(this.dx)<1){this.dx=0;}
+       if(this.keyMap){
+         if((!this.keyMap[this.keyLeft])&&(!this.keyMap[this.keyRight])){
+           //Come slowly to a stop if there's no keys pressed. Floors have friction!
+           this.dx=3*this.dx/4;
+           if(Math.abs(this.dx)<1){this.dx=0;}
+         }
        }
     }
     if(this.collisionLeft!=null||this.collisionRight!=null){

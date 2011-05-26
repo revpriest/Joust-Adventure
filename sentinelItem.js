@@ -31,7 +31,7 @@ function SentinelItem(name,x,y,direction){
     this.dx = 2
   }
 }
-SentinelItem.prototype = new PlayerItem();
+SentinelItem.prototype = new MeanieItem();
 
 
 

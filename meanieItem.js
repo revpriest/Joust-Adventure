@@ -1,9 +1,8 @@
-/***********************************************************
-* A meanie is like a player, only the keymap gets set by
+/*********************************************************** * A meanie is like a player, only the keymap gets set by
 * the AI here instead of by actual key-presses.
 */
 
-function MeanieItem(name,x,y,direction){
+MeanieItem = function(name,x,y,direction){
   this.init(name,x,y);
   this.halfWidth = 25;
   this.halfHeight = 30;
@@ -26,6 +25,18 @@ function MeanieItem(name,x,y,direction){
 }
 MeanieItem.prototype = new PlayerItem();
 
+/**************************************************
+* Oh dear, this is unfortunate, I seem to be dead.
+*/
+MeanieItem.prototype.die = function(){
+  if(this.flying){
+    this.flying.die();
+    this.ditchBird();
+    this.dying = 30;
+    this.graphic=document.getElementById("splat");
+    return;
+  }
+}
 
 
 /*************************************************
@@ -79,4 +90,3 @@ MeanieItem.prototype.doAi = function(){
 }
 
 
- 

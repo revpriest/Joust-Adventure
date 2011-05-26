@@ -8,14 +8,6 @@ when we'll have "Level One" ready to play. Here's the
 stuff I intend to do before "release" day on the first
 of June.
 
-*) Player never dies. He gets knocked off his mount and
-   falls down a long way perhaps, but he never *dies* as
-   such.
-
-*) Unmounted Meanies fall off map. Usually, at least,
-   we don't want them to be running about on the floor
-   the way they do at the moment.
-
 *) Make a better level layout
 
 *) Ideally more balloon graphics/colours\
