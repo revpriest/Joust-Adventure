@@ -395,3 +395,25 @@ PhysicsItem.prototype.updatePosition = function(){
 }
 
 
+/****************************************************
+* Standard collision detection, bounce off things.
+*/
+PhysicsItem.prototype.doStandardCollision = function(){
+    if(this.collisionTop!=null){
+       this.dy=-this.dy;
+       this.y = this.collisionTop.y+this.collisionTop.halfHeight+this.halfHeight;
+    }
+    if(this.collisionBottom!=null){
+       this.dy=0;
+       this.y = this.collisionBottom.y-this.collisionBottom.halfHeight-this.halfHeight;
+       if((!this.keyMap[this.keyLeft])&&(!this.keyMap[this.keyRight])){
+         //Come slowly to a stop if there's no keys pressed. Floors have friction!
+         this.dx=3*this.dx/4;
+         if(Math.abs(this.dx)<1){this.dx=0;}
+       }
+    }
+    if(this.collisionLeft!=null||this.collisionRight!=null){
+       this.dx=-this.dx;
+    }
+}
+

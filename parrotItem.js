@@ -20,11 +20,6 @@ function ParrotItem(name,x,y,direction){
   this.mortal = true;
   this.flyable = true;
   this.faceDirection = direction;
-  if(direction==1){
-    this.dx = -1-Math.floor(Math.random()*3);
-  }else{
-    this.dx = 1+Math.floor(Math.random()*3);
-  }
   this.burn = 1
   this.delayFrames=1;
   this.pilot = null; 
@@ -47,6 +42,17 @@ ParrotItem.prototype.doSelfControl = function(){
     return;
   }
   if(this.pilot == null){
+    //Collision Stuff.
+    this.doStandardCollision();
+
+    if(this.dx==0){
+      //Don't stand still boy!
+      if(this.faceDirection==1){
+        this.dx = -1-Math.floor(Math.random()*3);
+      }else{
+        this.dx = 1+Math.floor(Math.random()*3);
+      }
+    }
     this.mortal = true;
     if(Math.floor(Math.random()*6)<1){
       this.burn=1;

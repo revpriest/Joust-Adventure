@@ -140,23 +140,7 @@ PlayerItem.prototype.doSelfControl = function(){
 
 
     //Collision Stuff.
-    if(this.collisionTop!=null){
-       this.dy=-this.dy;
-       this.y = this.collisionTop.y+this.collisionTop.halfHeight+this.halfHeight;
-    }
-    if(this.collisionBottom!=null){
-       this.dy=0;
-       this.y = this.collisionBottom.y-this.collisionBottom.halfHeight-this.halfHeight;
-       if((!this.keyMap[this.keyLeft])&&(!this.keyMap[this.keyRight])){
-         //Come slowly to a stop if there's no keys pressed. Floors have friction!
-         this.dx=3*this.dx/4;
-         if(Math.abs(this.dx)<1){this.dx=0;}
-       }
-    }
-    if(this.collisionLeft!=null||this.collisionRight!=null){
-       this.dx=-this.dx;
-    }
-
+    this.doStandardCollision();
 
 
     //Movement.
@@ -231,7 +215,7 @@ PhysicsItem.prototype.ditchBird = function(){
    this.graphicsOffsetY = 0;
    if(this.gotLance){
      this.gotLance=false;
-     addPhysicsItem(null,new LanceItem("lance"+this.maxObjInt,this.x,this.y))
+//     addPhysicsItem(null,new LanceItem("lance"+this.maxObjInt,this.x,this.y))
      this.deadlyBox=undefined;
    }
 }

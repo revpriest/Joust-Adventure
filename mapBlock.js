@@ -43,6 +43,7 @@ function MapBlock(name,x,y,w,h,collision){
     this.solidLeft = true;
   }else if(collision==">"){
     this.graphic = document.getElementById("balloonRight");
+    this.graphicsOffsetY = 1;
     this.solidTop = true;
     this.solidBottom = true;
     this.solidRight = true;
