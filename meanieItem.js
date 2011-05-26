@@ -21,6 +21,7 @@ MeanieItem = function(name,x,y,direction){
   this.gotLance = false;
   this.noQuittingJump=1;
   this.keyMap = [];
+  this.friendlyFireCode = 1;    //Can't kill things with the same Friendly Fire code as you.
 }
 MeanieItem.prototype = new PlayerItem();
 

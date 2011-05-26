@@ -252,6 +252,9 @@ PhysicsItem.prototype.getItemKilled = function(){
   if(this.dying){return null;}
   for (var i in physicsItems){
     var item = physicsItems[i];
+    if((item.friendlyFireCode)&&(item.friendlyFireCode==this.friendlyFireCode)){
+      continue;
+    }
     if((item!=this.flying)&&(item!=this)&&(item.mortal)&&(!item.dying)&&(item.intersectsDeadlyBox(this))){
       return item;
     }

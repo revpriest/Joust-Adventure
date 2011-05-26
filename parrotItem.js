@@ -27,6 +27,7 @@ function ParrotItem(name,x,y,direction){
   this.burn = 1
   this.delayFrames=1;
   this.pilot = null; 
+  this.friendlyFireCode = 1;    //Can't kill things with the same Friendly Fire code as you.
 }
 ParrotItem.prototype = new PhysicsItem();
 ParrotItem.prototype.faceDirectionLeft = 1;

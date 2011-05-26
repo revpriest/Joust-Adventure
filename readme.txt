@@ -6,15 +6,9 @@ Oh yes. It's that silly.
 We're still a way from version 0.1 yet really. Which is
 when we'll have "Level One" ready to play. Here's the
 stuff I intend to do before "release" day on the first
-of June.
-
-*) Make a better level layout
-
-*) Ideally more balloon graphics/colours\
-
-*) Spend some more time improving collision detection.
-   God damn I hate collision detection. There's always
-   some case that doesn't bloody work properly.
+of June. How much of it will get done? Have a weekend,
+and a bank holiday. During which I also have one
+all night party. So. We'll see.
 
 *) Intro animation:
    *) Add a pink-monkey character
@@ -22,12 +16,12 @@ of June.
    *) Meanie comes and kidnaps PM
    *) Monkey jumps onto nearby parrot, grabs a lance and gives chase.
 
+*) Note "Level End" at top of map, link to index2.html
+
 *) Trap cursor-keys so we don't keep scrolling the page
-   as we try and jump.
+   as we try and jump. Or use different keys I guess.
 
 *) Improve the look of the index.html page some.
-
-*) Note "Level End" at top of map, link to index2.html
 
 *) joustadvenutre.dalliance.net to contain the project,
    not just link to commons hostage page.
@@ -37,6 +31,12 @@ of June.
    work.
 
 *) Better "Die" animation
+
+*) Ideally more balloon graphics/colours
+
+*) Spend some more time improving collision detection.
+   God damn I hate collision detection. There's always
+   some case that doesn't bloody work properly.
 
 *) Update Readme to describe game and funding process
 
