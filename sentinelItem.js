@@ -40,7 +40,6 @@ SentinelItem.prototype = new PlayerItem();
 * should be pressing.
 */
 SentinelItem.prototype.doAi = function(){
-    debugPrint(this.name+": target:"+this.targetY+": actual"+this.y);
     if(this.dx<0){
      this.keyMap[this.keyLeft]=true;
      this.keyMap[this.keyRight]=false;

@@ -122,16 +122,16 @@ var map = new Array
            "                    ",
            "         s          ",
            "<ZZZZZZZZ>          ",
-           "    s               ",
+           "    s            l  ",
            "                 ^  ",
            "       s         N  ",
            "           s     N  ",
            "                 N  ",
            "                 N  ",
            "       <ZZZZZ>   N  ",
-           "Q                N  ",
+           "lp               N  ",
            "<Z>              V  ",
-           "       l            ",
+           "                   Q",
            "ZZZZZZZZZZZZZZZZZZZZ",
            "                    ",
            "                    ",
@@ -173,14 +173,15 @@ addPhysicsItem = function(name,x){
 * the object called 'player'
 */
 function updateCamera(){
-  cameraX=player.x-screenWidth/2;
-  cameraY=player.y-screenHeight/2;
+  cameraX=Math.floor(player.x-screenWidth/2);
+  cameraY=Math.floor(player.y-screenHeight/2);
   if(cameraX<0){cameraX=0;}
   if(cameraX>mapWidth-screenWidth-screenWidth){cameraX=mapWidth-screenWidth-screenWidth;}
   if(cameraY<0){cameraY=0;}
   if(cameraY>mapHeight-screenHeight-screenHeight){cameraY=mapHeight-screenHeight-screenHeight}
   drawBackground(cameraX/2,cameraY/2);
   drawItems();
+  debugPrint("Camera: "+cameraX+","+cameraY);
 }
 
 
@@ -320,18 +321,18 @@ function addMapBlock(block,x,y){
        m.sleeping=true;
        break;
 
-    case 'p':   //A Parrot.
+    case 'q':   //A Parrot.
        addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
        break;
-    case 'q':   //A parrot
+    case 'p':   //A parrot
        addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
        break;
 
-    case 'P':   //A parrot, sleeping
+    case 'Q':   //A parrot, sleeping
        var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
        p.sleeping=true; 
        break;
-    case 'Q':   //A parrot, sleeping
+    case 'P':   //A parrot, sleeping
        var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
        p.sleeping=true; 
        break;

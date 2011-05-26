@@ -1,7 +1,0 @@
-Next up:
-
-Map edges!
-
-Make it add objects as we scroll 'em into view.
-
-Make it remove 'em as they scroll off
