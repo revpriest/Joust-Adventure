@@ -17,6 +17,7 @@ var screenWidth=800;
 var screenHeight=500;
 var player=null;
 var maxObjInt = 1;
+var pi = PhysicsItem.prototype;
 
 var map = new Array
           ("                    ",
@@ -128,7 +129,7 @@ var map = new Array
            "                 N  ",
            "                 N  ",
            "      <ZZZZZZ>   N  ",
-           "lp               N  ",
+           "lq               N  ",
            "<Z>              V  ",
            "                   Q",
            "ZZZZZZZZZZZZZZZZZZZZ",
@@ -221,7 +222,7 @@ keyDownHandler = function(e){
   keyMap[e.which]=true;
   if(nextTimeAlert){
     nextTimeAlert=false;
-    alert("KeyCode:"+e.which);
+    debugPrint("KeyCode:"+e.which);
   }
   if(e.which==27){
     nextTimeAlert=true;
@@ -294,49 +295,49 @@ function addMapBlock(block,x,y){
        break;
 
     case 's':   //Sentinel - Face Left
-       var m=addPhysicsItem(name,new SentinelItem(name,px<<6,py<<6,1));
-       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,1));
-       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,1));
+       var m=addPhysicsItem(name,new SentinelItem(name,px<<6,py<<6,pi.faceDirectionLeft));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,pi.faceDirectionLeft));
+       m.getLance();
        break;
 
     case 'S':   //Sentinel - Face Right
-       var m=addPhysicsItem(name,new SentinelItem(name,px<<6,py<<6,2));
-       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,2));
-       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,2));
+       var m=addPhysicsItem(name,new SentinelItem(name,px<<6,py<<6,pi.faceDirectionRight));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,pi.faceDirectionRight));
+       m.getLance();
        break;
 
     case '{': //Meanie, hard dude, facing left
-       var m=addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,1));
-       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,1));
-       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,1));
+       var m=addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,pi.faceDirectionLeft));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,pi.faceDirectionLeft));
        m.sleeping=true;
+       m.getLance();
        break;
 
     case '}': //Meaning, hard dude, facing right.
-       var m = addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,2));
-       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,2));
-       addPhysicsItem(name+"lance",new LanceItem(name+"lance",px<<6,py<<6,2));
+       var m = addPhysicsItem(name,new MeanieItem(name,px<<6,py<<6,pi.faceDirectionRight));
+       addPhysicsItem(name+"mount",new ParrotItem(name+"mount",px<<6,py<<6,pi.faceDirectionRight));
        m.sleeping=true;
+       m.getLance();
        break;
 
     case 'q':   //A Parrot.
-       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
+       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,pi.faceDirectionLeft));
        break;
     case 'p':   //A parrot
-       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
+       addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,pi.faceDirectionRight));
        break;
 
     case 'Q':   //A parrot, sleeping
-       var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,2));
+       var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,pi.faceDirectionLeft));
        p.sleeping=true; 
        break;
     case 'P':   //A parrot, sleeping
-       var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,1));
+       var p = addPhysicsItem(name,new ParrotItem(name,px<<6,py<<6,PhysicsItems.faceDirectionRight));
        p.sleeping=true; 
        break;
 
     case 'l':   //A lance
-       addPhysicsItem(name,new LanceItem(name,px<<6,(py<<6)-64,1));
+       addPhysicsItem(name,new LanceItem(name,px<<6,(py<<6)-64,0));
        break;
         
   }
@@ -457,12 +458,9 @@ function addNewMapBlocks(cx,cy,ox,oy){
 * Setup the game
 */
 function startGame(){
-  player = physicsItems['player'] = new PlayerItem("player",280,110*64,keyMap);
+  player = physicsItems['player'] = new PlayerItem("player",280,110*64,keyMap,pi.faceDirectionRight);
   updateCamera();
   fillFromMap();
-  document.keydown = function(){
-    alert("Key!");
-  }
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
   initCanvas();

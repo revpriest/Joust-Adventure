@@ -22,7 +22,6 @@ function SentinelItem(name,x,y,direction){
   this.flying=null;
   this.gotLance = false;
   this.noQuittingJump=1;
-  this.faceDirection = direction;
   this.keyMap = [];
   this.targetY = y;
   if(direction==1){

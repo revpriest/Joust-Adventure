@@ -3,7 +3,7 @@
 */
 
 function MapBlock(name,x,y,w,h,collision){
-  this.init(name,x,y);
+  this.init(name,x,y,1);
   this.halfWidth = w/2;
   this.halfHeight = h/2;
   this.background=true;

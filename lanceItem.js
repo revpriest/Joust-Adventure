@@ -2,8 +2,8 @@
 * The Map Block just hangs there, defying gravity.
 */
 
-function LanceItem(name,x,y){
-  this.init(name,x,y);
+function LanceItem(name,x,y,d){
+  this.init(name,x,y,d);
   this.halfWidth = 6;
   this.halfHeight = 75;
   this.graphic = document.getElementById("LanceV");

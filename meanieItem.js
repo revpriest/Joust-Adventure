@@ -3,7 +3,7 @@
 */
 
 MeanieItem = function(name,x,y,direction){
-  this.init(name,x,y);
+  this.init(name,x,y,direction);
   this.halfWidth = 25;
   this.halfHeight = 30;
   this.graphicsOffsetX = 15;
@@ -20,7 +20,6 @@ MeanieItem = function(name,x,y,direction){
   this.flying=null;
   this.gotLance = false;
   this.noQuittingJump=1;
-  this.faceDirection = direction;
   this.keyMap = [];
 }
 MeanieItem.prototype = new PlayerItem();
@@ -89,4 +88,10 @@ MeanieItem.prototype.doAi = function(){
   } 
 }
 
+/*****************************************8
+* Meanies don't collect lances.
+*/
+MeanieItem.prototype.collectLanceIfPresent = function(){
+  return;
+}
 

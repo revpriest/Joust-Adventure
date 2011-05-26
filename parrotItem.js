@@ -3,7 +3,7 @@
 */
 
 function ParrotItem(name,x,y,direction){
-  this.init(name,x,y);
+  this.init(name,x,y,direction);
   this.halfWidth = 30;
   this.halfHeight = 35;
   this.graphicsOffsetX = 13;
@@ -19,7 +19,11 @@ function ParrotItem(name,x,y,direction){
   this.walkFramesLW = [document.getElementById("ParrotStandingLW"),document.getElementById("ParrotWalk1LW"),document.getElementById("ParrotStandingLW"),document.getElementById("ParrotWalk2LW")];
   this.mortal = true;
   this.flyable = true;
-  this.faceDirection = direction;
+  if(this.faceDirection==this.faceDirectionLeft){
+    this.graphic = this.walkFramesL[0];
+  }else{
+    this.graphic = this.walkFramesR[0];
+  }
   this.burn = 1
   this.delayFrames=1;
   this.pilot = null; 

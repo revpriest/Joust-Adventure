@@ -2,8 +2,8 @@
 * The Player is obviously a type of PhysicsItem.
 */
 
-function PlayerItem(name,x,y,keyMap){
-  this.init(name,x,y);
+function PlayerItem(name,x,y,keyMap,direction){
+  this.init(name,x,y,direction);
   this.halfWidth = 25;
   this.halfHeight = 30;
   this.graphicsOffsetX = 15;
@@ -17,7 +17,6 @@ function PlayerItem(name,x,y,keyMap){
   this.walkAnimFramesL = [document.getElementById("SilverbackWalk1L"),document.getElementById("SilverbackWalk2L"),document.getElementById("SilverbackWalk3L"),document.getElementById("SilverbackWalk4L")];
   this.delayFrames=0;
   this.animFrame=1;
-  this.faceDirection = 1;
   this.mortal = true;
   this.flying=null;
   this.keyMap = keyMap;
@@ -96,6 +95,31 @@ PlayerItem.prototype.doAnimation = function(){
 }
 
 
+/******************************************************
+* If there's a lance there, collect it
+*/
+PlayerItem.prototype.collectLanceIfPresent = function(){
+   var collectableItem = this.getTouchedCollectable();
+   if(collectableItem){
+     collectableItem.die();
+     this.getLance();
+   }
+}
+
+
+/***********************************************
+* Give this player a lance
+*/
+PlayerItem.prototype.getLance = function(){
+   this.gotLance = true;
+   if(this.faceDirection==this.faceDirectionRight){
+     this.deadlyBox = {x1:0,y1:-1,x2:100,y2:4}
+   }else{
+     this.deadlyBox = {x1:0,y1:-1,x2:-100,y2:4}
+   }
+}
+
+
 
 /********************************************************
 * Player movement, including moving anything he's flying
@@ -126,16 +150,7 @@ PlayerItem.prototype.doSelfControl = function(){
       }
     }else{
       //Oh, already flying! Collect a lance maybe?
-      var collectableItem = this.getTouchedCollectable();
-      if(collectableItem){
-        collectableItem.die();
-        this.gotLance = true;
-        if(this.faceDirection==this.faceDirectionRight){
-          this.deadlyBox = {x1:0,y1:-1,x2:100,y2:4}
-        }else{
-          this.deadlyBox = {x1:0,y1:-1,x2:-100,y2:4}
-        }
-      }
+      this.collectLanceIfPresent();
     }
 
 

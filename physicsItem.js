@@ -3,8 +3,8 @@
 * physics. All players, ai-bots, collectables,
 * even bullets if we add 'em, inherit from this.
 */
-function PhysicsItem(name,px,py){
-    this.init(name,px,py);
+function PhysicsItem(name,px,py,d){
+    this.init(name,px,py,d);
 }
 PhysicsItem.prototype.gravityConstant = 2;
 PhysicsItem.prototype.faceDirectionLeft = 1;
@@ -13,7 +13,7 @@ PhysicsItem.prototype.faceDirectionRight = 2;
 /************************************************
 * Initialization
 */
-PhysicsItem.prototype.init = function(name,px,py){
+PhysicsItem.prototype.init = function(name,px,py,d){
     if(px==null){
       this.x=Math.floor(Math.random()*5000);
       this.y=Math.floor(Math.random()*5000);
@@ -26,6 +26,7 @@ PhysicsItem.prototype.init = function(name,px,py){
     this.graphicsOffsetX=0;
     this.graphicsOffsetY=0;
     this.name=name;
+    this.faceDirection = d;
     return this;
 }
 
@@ -337,7 +338,6 @@ PhysicsItem.prototype.killTip = function(){
   killedItem = this.getItemKilled();
   if(killedItem!=null){
     if((!killedItem.deadlyBox)||(!this.intersectsDeadlyBox(killedItem))){
-      debugPrint("Killed Item:"+killedItem.name+":"+killedItem.die);
       killedItem.die();
     }else{
       //Ahha, it's a stand-off, they're killing each other.

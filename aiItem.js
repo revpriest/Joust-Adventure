@@ -2,8 +2,8 @@
 * The Player is obviously a type of PhysicsItem.
 */
 
-function AiItem(name,x,y){
-  this.init(name,x,y);
+function AiItem(name,x,y,d){
+  this.init(name,x,y,d);
   this.halfWidth = 20;
   this.halfHeight = 40;
   this.graphicsOffsetX = 46;
@@ -11,7 +11,6 @@ function AiItem(name,x,y){
   this.deadlyBox= {x1:60,y1:-6,x2:0,y2:-9}
   this.faceLeftGraphic = document.getElementById("aiFaceLeft");
   this.faceRightGraphic = document.getElementById("aiFaceRight") ;
-  this.faceDirection = 0;
   this.mortal = true;
   this.dx = Math.floor(Math.random(6)-3);
   this.burn = 1
