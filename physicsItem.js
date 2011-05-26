@@ -72,8 +72,8 @@ PhysicsItem.prototype.doInertia = function(){
     // index2,3 = position of the collision point.
     this.y+=this.dy;
     this.x+=this.dx;
-    if(this.x>mapWidth-screenWidth-this.halfWidth){this.dx=-this.dx}
-    if(this.x<=this.halfWidth){this.x=this.halfWidth;this.dx=-this.dx;}
+    if(this.x>mapWidth-screenWidth-this.halfWidth){this.dx=-this.dx;this.x=mapWidth-screenWidth-this.halfWidth;}
+    if(this.x<=this.halfWidth){this.x=this.halfWidth;this.dx=-this.dx;this.x=this.halfWidth;}
     if(this.y>mapHeight-screenHeight-this.halfHeight){this.y=mapHeight-screenHeight-this.halfHeight;this.dy=-this.dy}
     if(this.y<=this.halfHeight){this.y=this.halfHeight;}
   }
