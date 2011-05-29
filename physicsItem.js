@@ -388,16 +388,20 @@ PhysicsItem.prototype.doAnimation = function(){
 * actually doing it's thing.
 */
 PhysicsItem.prototype.updatePosition = function(){
-  this.doCollisionDetection();
-  this.doAnimation();
-  this.doInertia();
-  this.doSelfControl();
-  this.fallUnderGravity();
-  if(this.deadlyBox){
-    this.killTip();
+  if((!levelComplete)||(this.isParticle)){
+    this.doCollisionDetection();
+    this.doAnimation();
+    this.doInertia();
+    this.doSelfControl();
+    this.fallUnderGravity();
+    if(this.deadlyBox){
+      this.killTip();
+    }
+  }else if(this==player || this ==girlfriend){
+     this.doLove();
   }
 }
-
+  
 
 /****************************************************
 * Standard collision detection, bounce off things.

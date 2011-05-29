@@ -3,6 +3,9 @@ body{
   background: black;
 }
 h1{
+  color: #ff0;
+}
+h1#loading{
   font-family: Impact, sans-serif;
   font-weight: normal;
   font-size: 32pt;
@@ -12,9 +15,8 @@ h1{
   position: absolute;
   top: 5px;
   left: 500px;
-  color: #ff0;
 }
-h2{
+h2#subtitle{
   font-family: Impact, sans-serif;
   font-weight: normal;
   color: white;
@@ -35,7 +37,7 @@ h2{
   z-index: 100;
 }
 #joust{
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
   width: 800px;
@@ -50,5 +52,30 @@ h2{
   text-align:center; 
   width: 960px;
   position: relative;
-  top: 100px;
+}
+
+#donate{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#logo {
+  text-align:left;
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+  font-size: 60pt;
+  height: 120px;
+}
+#logo a{
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+  color: white;
+}
+#logo a:hover{
+  color: #ff8;
+  text-decoration: underline;
+}
+a:link { 
+  color: #ffffff;
+  text-decoration: none;
 }

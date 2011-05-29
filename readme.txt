@@ -15,9 +15,6 @@ all night party. So. We'll see.
 *) Trap cursor-keys so we don't keep scrolling the page
    as we try and jump. Or use different keys I guess.
 
-*) joustadvenutre.dalliance.net to contain the project,
-   not just link to commons hostage page.
-
 *) Index2.html to contain a page describing plan for level2,
    and link to commons hostage page to pay for more dev
    work.
@@ -31,6 +28,11 @@ all night party. So. We'll see.
    some case that doesn't bloody work properly.
 
 *) Update Readme to describe game and funding process
+
+
+This is the font I've been using in-game for speech etc:
+http://www.dafont.com/shock-shimmy.font?fpp=50
+
 
 It's all GPL stuff, so here's some license text:
 

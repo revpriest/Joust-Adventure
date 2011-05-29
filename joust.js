@@ -3,6 +3,7 @@
 * ends with many nice levels worth of commons hostage
 * fun.
 */
+var nextLevel = "level2.php";
 var timer=null;
 var physicsItems=[];
 var keyMap = [];
@@ -21,6 +22,8 @@ var girlfriend = null;
 var maxObjInt = 1;
 var pi = PhysicsItem.prototype;
 var frameNumber=0;
+var levelComplete=false;
+var levelCompleteParticleSpeed = 4;
 
 var map = new Array
           ("                  ! ",
@@ -206,17 +209,18 @@ function runGame(){
     }
     n++;
   }
+  checkForLevelEnd();
 
   //Debug Printing.
-  dist = "Not Both In Game";
-  dist2 = "Not Both In Game";
-  if(player && girlfriend){
-    var dist = Math.floor(player.distanceTo(girlfriend));
-  }
-  if(player && bigBad){
-    var dist2 = Math.floor(player.distanceTo(bigBad));
-  }
-  debugPrint("Frame: "+frameNumber+" Items:"+n+"  Distance:"+dist+"   Bad:"+dist2);
+//  dist = "Not Both In Game";
+//  dist2 = "Not Both In Game";
+//  if(player && girlfriend){
+//    var dist = Math.floor(player.distanceTo(girlfriend));
+//  }
+//  if(player && bigBad){
+//    var dist2 = Math.floor(player.distanceTo(bigBad));
+//  }
+//  debugPrint("Frame: "+frameNumber+" Items:"+n+"  Distance:"+dist+"   Bad:"+dist2);
   var oldX=cameraX;
   var oldY=cameraY;
   updateCamera();
@@ -224,6 +228,27 @@ function runGame(){
   deleteDistantObjects(player);
   if(showCollision){
     showCollisionLines();
+  }
+}
+
+
+/*************************************************
+* Check for the level end. If it's all over, dance
+* or flash or animate or something.
+*/
+function checkForLevelEnd(){
+  if(player){
+    if(player.y<150){
+      if(girlfriend.distanceTo(player)<200){
+        levelComplete=true;
+      } 
+    }
+  }
+  if(levelComplete){
+    if(frameNumber%levelCompleteParticleSpeed==0){
+      name=this.name+(new Date).getTime()+"LC";
+      addPhysicsItem (name, new ParticleItem(name,cameraX+screenWidth/2-110,cameraY+screenHeight/2,this.faceDirection,"levelComplete")).background=false;
+    }
   }
 }
 
@@ -248,6 +273,7 @@ keyDownHandler = function(e){
     //CHEAT! Warp to the top.
     player.x = 50;
     player.y = 50;
+    bigBad.y=100;
     updateCamera();
     fillFromMap();
   }
@@ -269,6 +295,11 @@ keyDownHandler = function(e){
 }
 keyUpHandler = function(e){
   keyMap[e.which]=false;
+}
+mouseDownHandler = function(e){
+  if(levelComplete){
+    document.location = nextLevel;
+  }
 }
 
 
@@ -505,6 +536,7 @@ function start(){
   fillFromMap();
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
+  document.addEventListener('mousedown',mouseDownHandler,false);
   initCanvas();
   var x = document.getElementById("loading");
   x.innerHTML="Joust";

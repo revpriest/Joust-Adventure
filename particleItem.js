@@ -11,6 +11,7 @@ function ParticleItem(name,x,y,direction,graphicName){
   this.dx = 5-Math.floor(Math.random()*10);
   this.dy = 5-Math.floor(Math.random()*10)-15;
   this.dying = 50;
+  this.isParticle=true;
 }
 ParticleItem.prototype = new PhysicsItem();
 
