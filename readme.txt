@@ -10,20 +10,13 @@ of June. How much of it will get done? Have a weekend,
 and a bank holiday. During which I also have one
 all night party. So. We'll see.
 
-*) Note "Level End" at top of map, link to index2.html
-
-*) Trap cursor-keys so we don't keep scrolling the page
-   as we try and jump. Or use different keys I guess.
-
-*) Index2.html to contain a page describing plan for level2,
-   and link to commons hostage page to pay for more dev
-   work.
+*) New graphics for big-bad, make him an alien on a crow.
 
 *) Better "Die" animation
 
 *) Ideally more balloon graphics/colours
 
-*) Spend some more time improving collision detection.
+*) Ideally Spend some more time improving collision detection.
    God damn I hate collision detection. There's always
    some case that doesn't bloody work properly.
 
@@ -33,9 +26,7 @@ all night party. So. We'll see.
 This is the font I've been using in-game for speech etc:
 http://www.dafont.com/shock-shimmy.font?fpp=50
 
-
 It's all GPL stuff, so here's some license text:
-
   
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by

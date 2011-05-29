@@ -529,6 +529,13 @@ function addNewMapBlocks(cx,cy,ox,oy){
 * Setup the game
 */
 function start(){
+  //Stop keys scrolling the page.
+  document.onkeydown = function(e) {
+    var k = e.keyCode;
+    if(k >= 37 && k <= 40) {
+        return false;
+    }
+  }
   player = addPhysicsItem('player',new PlayerItem("player",280,111*64+11,keyMap,pi.faceDirectionRight));
   girlfriend = addPhysicsItem('girlfriend',new GirlfriendItem('girlfriend',330,111*64+11,pi.faceDirectionLeft));
   bigBad = addPhysicsItem('bigbad',new BigBadItem('bigbad',0,102*64,pi.faceDirectionRight));
