@@ -208,15 +208,15 @@ function runGame(){
   }
 
   //Debug Printing.
-//  dist = "Not Both In Game";
-//  dist2 = "Not Both In Game";
-//  if(player && girlfriend){
-//    var dist = Math.floor(player.distanceTo(girlfriend));
-//  }
-//  if(player && bigBad){
-//    var dist2 = Math.floor(player.distanceTo(bigBad));
-//  }
-//  debugPrint("Frame: "+frameNumber+" Items:"+n+"  Distance:"+dist+"   Bad:"+dist2);
+  dist = "Not Both In Game";
+  dist2 = "Not Both In Game";
+  if(player && girlfriend){
+    var dist = Math.floor(player.distanceTo(girlfriend));
+  }
+  if(player && bigBad){
+    var dist2 = Math.floor(player.distanceTo(bigBad));
+  }
+  debugPrint("Frame: "+frameNumber+" Items:"+n+"  Distance:"+dist+"   Bad:"+dist2);
   var oldX=cameraX;
   var oldY=cameraY;
   updateCamera();
@@ -243,6 +243,27 @@ keyDownHandler = function(e){
   }
   if(e.which==67){
     showCollision=!showCollision;
+  }
+  if(e.which==68){
+    //CHEAT! Warp to the top.
+    player.x = 50;
+    player.y = 50;
+    updateCamera();
+    fillFromMap();
+  }
+  if(e.which==69){
+    //CHEAT! Warp to the Girlfriend.
+    player.x = girlfriend.x
+    player.y = girlfriend.y;
+    updateCamera();
+    fillFromMap();
+  }
+  if(e.which==70){
+    //CHEAT! Warp to the Bottom again.
+    player.x = 280;
+    player.y = 111*64;
+    updateCamera();
+    fillFromMap();
   }
   return false;
 }
@@ -369,7 +390,7 @@ function addMapBlock(block,x,y){
 function deleteDistantObjects(p){
   for (var i in physicsItems){
      var item = physicsItems[i];
-     if(this.neverRemove){
+     if(item.neverRemove){
        //Don't remove it, duh
      }else{
        if(item.x<p.x-screenWidth*2){

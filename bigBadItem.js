@@ -72,3 +72,5 @@ BigBadItem.prototype.doAi = function(){
 
 
 
+BigBadItem.prototype.die = function(){
+}

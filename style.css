@@ -30,8 +30,9 @@ h2{
 }
 #stringy {
   position: absolute;
-  top:0px;
-  left: 0px;
+  top:100px;
+  left: 10px;
+  z-index: 100;
 }
 #joust{
   position: absolute;

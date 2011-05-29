@@ -36,5 +36,6 @@ GirlfriendItem.prototype = new PlayerItem();
 GirlfriendItem.prototype.fly = function(flyableItem){
 } 
 
-
+GirlfriendItem.prototype.die = function(){
+}
 
