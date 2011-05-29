@@ -403,9 +403,11 @@ PhysicsItem.prototype.updatePosition = function(){
 * Standard collision detection, bounce off things.
 */
 PhysicsItem.prototype.doStandardCollision = function(){
-    if(this.collisionTop!=null){
-       this.dy=-this.dy;
-       this.y = this.collisionTop.y+this.collisionTop.halfHeight+this.halfHeight;
+    if(!this.neverBumpsHead){
+      if(this.collisionTop!=null){
+         this.dy=-this.dy;
+         this.y = this.collisionTop.y+this.collisionTop.halfHeight+this.halfHeight;
+      }
     }
     if(this.collisionBottom!=null){
        this.dy=0;

@@ -22,11 +22,13 @@ function PlayerItem(name,x,y,keyMap,direction){
   this.keyMap = keyMap;
   this.gotLance = false;
   this.noRemount=1;
+  this.particleSpeed=5;
 }
 PlayerItem.prototype = new PhysicsItem();
 PlayerItem.prototype.keyDown = 40;
 PlayerItem.prototype.keyUp = 38;
 PlayerItem.prototype.keyLeft = 37;
+PlayerItem.prototype.keyLove = 76;
 PlayerItem.prototype.keyRight = 39;
 
 
@@ -101,8 +103,10 @@ PlayerItem.prototype.doAnimation = function(){
 PlayerItem.prototype.collectLanceIfPresent = function(){
    var collectableItem = this.getTouchedCollectable();
    if(collectableItem){
-     collectableItem.die();
-     this.getLance();
+     if(!this.gotLance){
+       collectableItem.die();
+       this.getLance();
+     }
    }
 }
 
@@ -120,11 +124,27 @@ PlayerItem.prototype.getLance = function(){
 }
 
 
+/******************************************************
+* Fly an item
+*/
+PlayerItem.prototype.fly = function(flyableItem){
+  this.flying=flyableItem;
+  flyableItem.pilot = this;
+  this.halfWidth = 35
+  this.halfHeight = 49;
+  this.graphicsOffsetX = 0;
+  this.graphicsOffsetY = 0;
+  this.faceDirection = flyableItem.faceDirection;
+}
+
+
+
 
 /********************************************************
 * Player movement, including moving anything he's flying
 */
 PlayerItem.prototype.doSelfControl = function(){
+
 
   this.invulnerable--;
   if(this.invulnerable<0){this.invulnerable=0;}
@@ -133,6 +153,10 @@ PlayerItem.prototype.doSelfControl = function(){
   if(typeof this.doAi == 'function') {
     this.doAi();
   }
+  //If this 'player' can love, then do that
+  if(typeof this.doLove == 'function') {
+    this.doLove();
+  }
 
   //Then get on with stuff.
   if(!this.dying){
@@ -140,13 +164,7 @@ PlayerItem.prototype.doSelfControl = function(){
     if(this.flying==null){
       var flyableItem = this.getTouchedFlyable();
       if(flyableItem!=null){
-        this.flying=flyableItem;
-        flyableItem.pilot = this;
-        this.halfWidth = 35
-        this.halfHeight = 49;
-        this.graphicsOffsetX = 0;
-        this.graphicsOffsetY = 0;
-        this.faceDirection = flyableItem.faceDirection;
+        this.fly(flyableItem);
       }
     }else{
       //Oh, already flying! Collect a lance maybe?
@@ -210,6 +228,11 @@ PlayerItem.prototype.doSelfControl = function(){
 
   }
 
+  //Loving?
+  if(this.keyMap[this.keyLove]){
+    this.loveTime = 5;
+  }
+
   //Execute tiredness!
   if(this.dx>11){this.dx=11;}
   if(this.dx<-11){this.dx=-11;}
@@ -250,5 +273,25 @@ PlayerItem.prototype.die = function(){
 }
 
 
+/*************************************************
+* Give me some LOVE
+*/
+PlayerItem.prototype.doLove = function(){
+  if(frameNumber%this.particleSpeed!=0){
+    return;
+  } 
+  if(this==girlfriend || this==player){
+    if(girlfriend.distanceTo(player)<200){
+      //Create a love icon
+      var name = this.name+(new Date).getTime();
+      addPhysicsItem (name, new ParticleItem(name,this.x,this.y,this.faceDirection,"heart"));
+    }else{
+      if(this==girlfriend){
+        //Cry for help!
+        addPhysicsItem (name, new ParticleItem(name,this.x,this.y,this.faceDirection,"help"));
+      }
+    }
+  }
+}
 
 

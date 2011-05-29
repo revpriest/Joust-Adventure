@@ -16,12 +16,15 @@ var showCollision=false;
 var screenWidth=800;
 var screenHeight=500;
 var player=null;
+var bigBad = null;
+var girlfriend = null;
 var maxObjInt = 1;
 var pi = PhysicsItem.prototype;
+var frameNumber=0;
 
 var map = new Array
-          ("                    ",
-           "                    ",
+          ("                  ! ",
+           "            <ZZZZZZZ",
            "                    ",
            "                    ",
            "                ^   ",
@@ -30,7 +33,7 @@ var map = new Array
            "                N   ",
            "                N   ",
            "                N   ",
-           "                N   ",
+           "                N}  ",
            " s  } p s       N   ",
            "<ZZZZZZ>        N   ",
            "    s           N   ",
@@ -68,15 +71,15 @@ var map = new Array
            "            l  s  Q ",
            "           <ZZZZZZZ>",
            "                    ",
-           "    <N>             ",
-           "      SSS    s      ",
-           "p     SSS l  s      ",
+           "    <Z>             ",
+           "      SsS    s      ",
+           "p     SsS l  s      ",
            "         <ZZZ>      ",
            "   ^                ",
            "   N                ",
            "   N                ",
            "   N      SS        ",
-           "   N      SS p      ",
+           "   N      SS pl     ",
            "   N     <ZZZZZ>    ",
            "   N                ",
            "   N                ",
@@ -132,7 +135,7 @@ var map = new Array
            "lq               N  ",
            "<Z>              V  ",
            "                   Q",
-           "ZZZZZZZZZZZZZZZZZZZZ",
+           "ZZZZZZZZZZZZZZZZZZZ>",
            "                    ",
            "                    ",
            "                    ",
@@ -140,7 +143,7 @@ var map = new Array
            "                    ",
            "                    ",
            "                    ",
-           "ZZZZZZZZZZZZZZZZZZZZ");
+           "<ZZZZZZZZZZZZZZZZZZ>");
 
 
 
@@ -190,6 +193,7 @@ function updateCamera(){
 * time a second, we're gonna be slow. So keep the code FAST.
 */
 function runGame(){
+  frameNumber++;
   var n=0;
   for (var i in physicsItems){
      var item = physicsItems[i];
@@ -202,7 +206,17 @@ function runGame(){
     }
     n++;
   }
-//  debugPrint("Items:"+n);
+
+  //Debug Printing.
+//  dist = "Not Both In Game";
+//  dist2 = "Not Both In Game";
+//  if(player && girlfriend){
+//    var dist = Math.floor(player.distanceTo(girlfriend));
+//  }
+//  if(player && bigBad){
+//    var dist2 = Math.floor(player.distanceTo(bigBad));
+//  }
+//  debugPrint("Frame: "+frameNumber+" Items:"+n+"  Distance:"+dist+"   Bad:"+dist2);
   var oldX=cameraX;
   var oldY=cameraY;
   updateCamera();
@@ -336,6 +350,7 @@ function addMapBlock(block,x,y){
        p.sleeping=true; 
        break;
 
+
     case 'l':   //A lance
        addPhysicsItem(name,new LanceItem(name,px<<6,(py<<6)-64,0));
        break;
@@ -354,15 +369,19 @@ function addMapBlock(block,x,y){
 function deleteDistantObjects(p){
   for (var i in physicsItems){
      var item = physicsItems[i];
-     if(item.x<p.x-screenWidth*2){
-       delete physicsItems[i];
-     }else if(item.x>p.x+screenWidth*2){
-       delete physicsItems[i];
-     }else if(item.y<p.y-screenHeight*2){
-       delete physicsItems[i];
-     }else if(item.y>p.y+screenHeight*2){
-       delete physicsItems[i];
-     }
+     if(this.neverRemove){
+       //Don't remove it, duh
+     }else{
+       if(item.x<p.x-screenWidth*2){
+         delete physicsItems[i];
+       }else if(item.x>p.x+screenWidth*2){
+         delete physicsItems[i];
+       }else if(item.y<p.y-screenHeight*2){
+         delete physicsItems[i];
+       }else if(item.y>p.y+screenHeight*2){
+         delete physicsItems[i];
+       }
+    }
   }
   
 }
@@ -457,15 +476,17 @@ function addNewMapBlocks(cx,cy,ox,oy){
 /*******************************
 * Setup the game
 */
-function startGame(){
-  player = physicsItems['player'] = new PlayerItem("player",280,110*64,keyMap,pi.faceDirectionRight);
+function start(){
+  player = addPhysicsItem('player',new PlayerItem("player",280,111*64+11,keyMap,pi.faceDirectionRight));
+  girlfriend = addPhysicsItem('girlfriend',new GirlfriendItem('girlfriend',330,111*64+11,pi.faceDirectionLeft));
+  bigBad = addPhysicsItem('bigbad',new BigBadItem('bigbad',0,102*64,pi.faceDirectionRight));
   updateCamera();
   fillFromMap();
   document.addEventListener('keydown',keyDownHandler,false);
   document.addEventListener('keyup',keyUpHandler,false);
   initCanvas();
   var x = document.getElementById("loading");
-  x.innerHTML="Joust Adventures";
+  x.innerHTML="Joust";
   timer = setInterval("runGame()",50);
   return true;
 }

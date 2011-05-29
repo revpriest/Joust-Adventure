@@ -10,18 +10,10 @@ of June. How much of it will get done? Have a weekend,
 and a bank holiday. During which I also have one
 all night party. So. We'll see.
 
-*) Intro animation:
-   *) Add a pink-monkey character
-   *) Start with player and PM loving each other
-   *) Meanie comes and kidnaps PM
-   *) Monkey jumps onto nearby parrot, grabs a lance and gives chase.
-
 *) Note "Level End" at top of map, link to index2.html
 
 *) Trap cursor-keys so we don't keep scrolling the page
    as we try and jump. Or use different keys I guess.
-
-*) Improve the look of the index.html page some.
 
 *) joustadvenutre.dalliance.net to contain the project,
    not just link to commons hostage page.

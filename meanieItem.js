@@ -73,21 +73,11 @@ MeanieItem.prototype.doAi = function(){
   }
 
   if(soughtItem!=null){
-    if(soughtItem.x<this.x-64){
-      this.keyMap[this.keyLeft]=true;
-      this.keyMap[this.keyRight]=false;
-    }else if(soughtItem.x>this.x+64){
-      this.keyMap[this.keyLeft]=false;
-      this.keyMap[this.keyRight]=true;
-    }
-    
-    if(soughtItem.y<this.y){
-      this.keyMap[this.keyUp]=true;
-    }else{
-      this.keyMap[this.keyUp]=false;
-    }
+    this.seek(soughtItem.x,soughtItem.y);
   } 
 }
+
+
 
 /*****************************************8
 * Meanies don't collect lances.
@@ -96,3 +86,25 @@ MeanieItem.prototype.collectLanceIfPresent = function(){
   return;
 }
 
+
+
+
+
+/**********************************************************
+* Press the keys to make him head towards some item
+*/
+MeanieItem.prototype.seek = function(x,y){
+  if(x<this.x-64){
+    this.keyMap[this.keyLeft]=true;
+    this.keyMap[this.keyRight]=false;
+  }else if(x>this.x+64){
+    this.keyMap[this.keyLeft]=false;
+    this.keyMap[this.keyRight]=true;
+  }
+  
+  if(y<this.y){
+    this.keyMap[this.keyUp]=true;
+  }else{
+    this.keyMap[this.keyUp]=false;
+  }
+}
