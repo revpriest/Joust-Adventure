@@ -22,8 +22,8 @@ var girlfriend = null;
 var maxObjInt = 1;
 var pi = PhysicsItem.prototype;
 var frameNumber=0;
-var levelComplete=false;
-var levelCompleteParticleSpeed = 4;
+var levelComplete=-1;
+var levelCompleteParticleSpeed = 3;
 var gamePaused = true;
 
 var map = new Array
@@ -103,7 +103,7 @@ var map = new Array
            "    <ZZZZZZZZZZ>    ",
            "                    ",
            "p                   ",
-           "ZZ>       s  l      ",
+           "ZZ>       s  lp     ",
            "         <ZZZZ>     ",
            "       S            ",
            "    p  l            ",
@@ -154,13 +154,9 @@ var map = new Array
 /**********************************************
 * Print something for debugging.
 */
-function debugPrint(s){
+function textOut(s){
   var e = document.getElementById("stringy");
   e.innerHTML = s;
-}
-function debugAppend(s){
-  var e = document.getElementById("stringy");
-  e.innerHTML += s;
 }
 
 
@@ -233,17 +229,21 @@ function runGame(){
 * or flash or animate or something.
 */
 function checkForLevelEnd(){
-  if(player){
-    if(player.y<150){
-      if(girlfriend.distanceTo(player)<200){
-        levelComplete=true;
-      } 
-    }
+  if((levelComplete>-1) && (levelComplete<frameNumber-50)){
+    textOut("Click To Continue");
   }
-  if(levelComplete){
+  if(levelComplete>-1){
     if(frameNumber%levelCompleteParticleSpeed==0){
       name=this.name+(new Date).getTime()+"LC";
       addPhysicsItem (name, new ParticleItem(name,cameraX+screenWidth/2-110,cameraY+screenHeight/2,this.faceDirection,"levelComplete")).background=false;
+    }
+  }else{
+    if(player){
+      if(player.y<150){
+        if(girlfriend.distanceTo(player)<200){
+          levelComplete=frameNumber;
+        } 
+      }
     }
   }
 }
@@ -257,7 +257,7 @@ keyDownHandler = function(e){
   keyMap[e.which]=true;
   if(nextTimeAlert){
     nextTimeAlert=false;
-    debugPrint("KeyCode:"+e.which);
+//    textOut("KeyCode:"+e.which);
   }
   if(e.which==27){
     nextTimeAlert=true;
@@ -298,7 +298,7 @@ keyUpHandler = function(e){
 mouseDownHandler = function(e){
   if(e.target == document.getElementById("gameCanvas")){
     gamePaused = !gamePaused;
-    if(levelComplete){
+    if(levelComplete>-1){
       document.location = nextLevel;
     }
   }else{

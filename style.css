@@ -31,10 +31,17 @@ h2#subtitle{
   color: #fff;
 }
 #stringy {
+  font-size: 3em;
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+  text-shadow: 3px 3px 5px black;
+  color: white;
   position: absolute;
-  top:100px;
-  left: 10px;
-  z-index: 100;
+  top:500px;
+  left: 0px;
+  width: 100%;
+  text-align:center;
+  z-index: 140;
 }
 #joust{
   position: relative;

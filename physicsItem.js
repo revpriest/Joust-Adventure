@@ -383,7 +383,7 @@ PhysicsItem.prototype.doAnimation = function(){
 * actually doing it's thing.
 */
 PhysicsItem.prototype.updatePosition = function(){
-  if((!levelComplete)||(this.isParticle)){
+  if((levelComplete<0)||(this.isParticle)){
     this.doCollisionDetection();
     this.doAnimation();
     this.doInertia();
