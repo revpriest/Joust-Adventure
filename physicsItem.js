@@ -27,6 +27,7 @@ PhysicsItem.prototype.init = function(name,px,py,d){
     this.graphicsOffsetY=0;
     this.name=name;
     this.faceDirection = d;
+    this.oldFaceDirection = d;
     return this;
 }
 
@@ -329,6 +330,7 @@ PhysicsItem.prototype.findClosestX = function(f){
 PhysicsItem.prototype.die = function(){
   this.dying = 30;
   this.graphic=document.getElementById("splat");
+  this.background=true;
 }
 
 
@@ -371,13 +373,6 @@ PhysicsItem.prototype.doAnimation = function(){
     }else if(this.dx>0){
        this.faceDirection=this.faceDirectionRight;
        this.graphic=this.faceRightGraphic;
-    }
-  }
-  if(this.oldFaceDirection!=this.faceDirection){
-    this.oldFaceDirection=this.faceDirection;
-    if(this.deadlyBox){
-        this.deadlyBox.x1=-this.deadlyBox.x1;
-        this.deadlyBox.x2=-this.deadlyBox.x2;
     }
   }
 }

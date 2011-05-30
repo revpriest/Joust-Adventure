@@ -5,7 +5,7 @@
 */
 
 function SentinelItem(name,x,y,direction){
-  this.init(name,x,y);
+  this.init(name,x,y,direction);
 
   this.flyingHalfWidth = 35;
   this.flyingHalfHeight = 49;
@@ -36,10 +36,12 @@ function SentinelItem(name,x,y,direction){
   this.noQuittingJump=1;
   this.keyMap = [];
   this.targetY = y;
-  if(direction==1){
-    this.dx = -2
-  }else{
+  if(direction==this.faceDirectionRight){
     this.dx = 2
+    this.graphic = this.faceRightGraphic;
+  }else{
+    this.dx = -2
+    this.graphic = this.faceLeftGraphic;
   }
 }
 SentinelItem.prototype = new MeanieItem();

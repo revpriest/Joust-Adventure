@@ -24,38 +24,38 @@ var pi = PhysicsItem.prototype;
 var frameNumber=0;
 var levelComplete=false;
 var levelCompleteParticleSpeed = 4;
-var gamePaused = false;
+var gamePaused = true;
 
 var map = new Array
-          ("                  ! ",
-           "            <ZZZZZZZ",
+          ("                    ",
            "                    ",
            "                    ",
-           "                ^   ",
-           " } ss  S        N   ",
-           "<ZZZZZZ>        N   ",
+           "                    ",
+           "                    ",
+           " } ss  S            ",
+           "<ZZZZZZ>        ^   ",
+           " l              N   ",
+           "    s           N   ",
+           "    s           N   ",
            "                N   ",
-           "                N   ",
-           "                N   ",
-           "                N}  ",
-           " s  } p s       N   ",
+           " s    p s       N   ",
            "<ZZZZZZ>        N   ",
            "    s           N   ",
            "    s           N   ",
-           "    s           V   ",
-           "                    ",
+           "    s           V  {",
+           "                <ZZZ",
            "                    ",
            " p                  ",
            "           lS   s Q ",
            "         <ZZZZZZZZZ>",
-           "                    ",
-           "                    ",
-           "                    ",
+           "      s             ",
+           "  s                 ",
+           "          s         ",
            "                  l ",
            "      Ps lS         ",
-           "     <ZZZZZZ>       ",
-           " ss S s  N          ",
-           "    ls   V          ",
+           "  S  <ZZZZZZ>       ",
+           "         N          ",
+           "    l    V          ",
            "    ^               ",
            "    N               ",
            "    N       s   S   ",
@@ -70,20 +70,20 @@ var map = new Array
            "<ZZZZZZZ>           ",
            "                    ",
            "                    ",
-           "                    ",
+           " s                  ",
            "                    ",
            "            l  s  Q ",
-           "           <ZZZZZZZ>",
+           " s         <ZZZZZZZ>",
            "                    ",
            "    <Z>             ",
-           "      SsS    s      ",
-           "p     SsS l  s      ",
-           "         <ZZZ>      ",
-           "   ^                ",
+           "      s S    s      ",
+           "      s S l  s      ",
+           "   l     <ZZZ>      ",
+           "   ^p               ",
            "   N                ",
-           "   N                ",
-           "   N      SS        ",
-           "   N      SS pl     ",
+           "   N  s             ",
+           "   N       S        ",
+           "   N       S pl     ",
            "   N     <ZZZZZ>    ",
            "   N                ",
            "   N                ",
@@ -97,27 +97,27 @@ var map = new Array
            " Ps                 ",
            " <ZZZZZZZ>          ",
            "           S        ",
-           "                    ",
+           "         s          ",
            "              S     ",
-           "         S          ",
+           "                    ",
            "    <ZZZZZZZZZZ>    ",
            "                    ",
            "p                   ",
            "ZZ>       s  l      ",
            "         <ZZZZ>     ",
            "       S            ",
-           "       s            ",
            "    p  l            ",
            "    <ZZZZ>          ",
+           "         s          ",
            "                    ",
            "         ^          ",
-           "         N S        ",
+           "         N Sl       ",
            "     <ZZZNZZZ>      ",
            "         N          ",
-           "  s l s  Ns         ",
+           "  s l    Ns         ",
            "         N          ",
-           "         N          ",
-           "         N          ",
+           "         N         p",
+           "      s  N     <ZZZZ",
            "         N          ",
            "         N          ",
            "    p    N          ",
@@ -264,6 +264,9 @@ keyDownHandler = function(e){
   }
   if(e.which==67){
     showCollision=!showCollision;
+  }
+  if(e.which==32){
+    gamePaused = !gamePaused;
   }
   if(e.which==68){
     //CHEAT! Warp to the top.
@@ -532,16 +535,19 @@ function addNewMapBlocks(cx,cy,ox,oy){
 function start(){
   //Stop keys scrolling the page.
   document.onkeydown = function(e) {
+    var k = e.keyCode;
     if(!gamePaused){
-      var k = e.keyCode;
       if(k >= 37 && k <= 40) {
           return false;
       }
     }
+    if(k == 32) {
+        return false;
+    }
   }
   player = addPhysicsItem('player',new PlayerItem("player",280,111*64+11,keyMap,pi.faceDirectionRight));
   girlfriend = addPhysicsItem('girlfriend',new GirlfriendItem('girlfriend',330,111*64+11,pi.faceDirectionLeft));
-  bigBad = addPhysicsItem('bigbad',new BigBadItem('bigbad',0,102*64,pi.faceDirectionRight));
+  bigBad = addPhysicsItem('bigbad',new BigBadItem('bigbad',30,103*64,pi.faceDirectionRight));
   updateCamera();
   fillFromMap();
   document.addEventListener('keydown',keyDownHandler,false);

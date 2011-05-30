@@ -132,13 +132,6 @@ ParrotItem.prototype.doAnimation = function(){
     }
   }
     
-  if(this.oldFaceDirection!=this.faceDirection){
-    this.oldFaceDirection=this.faceDirection;
-    if(this.deadlyBox){
-        this.deadlyBox.x1=-this.deadlyBox.x1;
-        this.deadlyBox.x2=-this.deadlyBox.x2;
-    }
-  }
 }
 
 

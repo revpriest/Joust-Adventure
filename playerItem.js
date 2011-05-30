@@ -34,7 +34,11 @@ function PlayerItem(name,x,y,keyMap,direction){
   this.gotLance = false;
   this.noRemount=1;
   this.particleSpeed=10;
-  this.graphic = this.faceRightGraphic;
+  if(direction==this.faceDirectionRight){
+    this.graphic = this.faceRightGraphic;
+  }else{
+    this.graphic = this.faceLeftGraphic;
+  }
 }
 PlayerItem.prototype = new PhysicsItem();
 PlayerItem.prototype.keyDown = 40;

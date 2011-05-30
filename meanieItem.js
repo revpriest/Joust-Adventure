@@ -34,6 +34,13 @@ MeanieItem = function(name,x,y,direction){
   this.noQuittingJump=1;
   this.keyMap = [];
   this.friendlyFireCode = 1;    //Can't kill things with the same Friendly Fire code as you.
+  if(direction==this.faceDirectionRight){
+    this.dx = 2
+    this.graphic = this.faceRightGraphic;
+  }else{
+    this.dx = -2
+    this.graphic = this.faceLeftGraphic;
+  }
 }
 MeanieItem.prototype = new PlayerItem();
 
@@ -46,6 +53,7 @@ MeanieItem.prototype.die = function(){
     this.ditchBird();
     this.dying = 30;
     this.graphic=document.getElementById("splat");
+    this.background=true;
     return;
   }
 }

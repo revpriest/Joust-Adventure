@@ -35,9 +35,14 @@ BigBadItem = function(name,x,y,direction){
   this.keyMap = [];
   this.friendlyFireCode = 1;    //Can't kill things with the same Friendly Fire code as you.
   this.neverRemove = true;
+  if(direction==this.faceDirectionRight){
+    this.graphic = this.faceRightGraphic;
+  }else{
+    this.graphic = this.faceLeftGraphic;
+  }
 
   //big bad has a mount. Basically always.
-  var p = addPhysicsItem(this.name+"mount",new CrowItem(this.mount+"mount",this.x,this.y,this.faceDirection)) 
+  var p = addPhysicsItem(this.name+"mount",new CrowItem(this.mount+"mount",this.x,this.y,direction)) 
   this.fly(p);
   this.getLance();
   this.mode = this.mode_wait;
