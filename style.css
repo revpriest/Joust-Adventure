@@ -12,6 +12,14 @@ body{
 h1{
   color: #ff0;
 }
+h1{
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+}
+h2{
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+}
 h1#loading{
   font-family: Impact, sans-serif;
   font-weight: normal;

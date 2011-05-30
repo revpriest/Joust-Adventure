@@ -25,7 +25,7 @@ var frameNumber=0;
 var levelComplete=-1;
 var levelCompleteParticleSpeed = 3;
 var gamePaused = true;
-var debug = false;
+var debug = true;
 
 var map = new Array
           ("                    ",
@@ -263,11 +263,14 @@ keyDownHandler = function(e){
     gamePaused = !gamePaused;
   }
   if(debug){
-if(nextTimePrint){
+    if(nextTimePrint){
       nextTimePrint=false;
-      textOut("KeyCode:"+e.which);
-    }
-    if(e.which==27){
+      if(e.which==27){
+        textOut("");
+      }else{
+        textOut("KeyCode:"+e.which);
+      }
+    }else if(e.which==27){
       nextTimePrint=true;
     }
     //Cheat Keys!
