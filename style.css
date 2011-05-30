@@ -1,3 +1,10 @@
+/* 
+* Stylesheet for Joust Adventure. We use a font in-game, might even
+* wanna put it into the style sheet at some point. The font is here:
+* http://www.dafont.com/shock-shimmy.font?fpp=50
+* 
+*/
+
 body{
   color: white;
   background: black;

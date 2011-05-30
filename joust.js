@@ -25,6 +25,7 @@ var frameNumber=0;
 var levelComplete=-1;
 var levelCompleteParticleSpeed = 3;
 var gamePaused = true;
+var debug = false;
 
 var map = new Array
           ("                    ",
@@ -60,7 +61,7 @@ var map = new Array
            "    N               ",
            "    N       s   S   ",
            "    N         l   Q ",
-           "    N      <ZZZZZZZ>",
+           "p   N      <ZZZZZZZ>",
            "    N               ",
            "    N               ",
            "    V               ",
@@ -252,46 +253,49 @@ function checkForLevelEnd(){
 /********************************
 * Function to get key events
 */
-var nextTimeAlert=false;
+var nextTimePrint=false;
 keyDownHandler = function(e){
   keyMap[e.which]=true;
-  if(nextTimeAlert){
-    nextTimeAlert=false;
-//    textOut("KeyCode:"+e.which);
-  }
-  if(e.which==27){
-    nextTimeAlert=true;
-  }
   if(e.which==67){
     showCollision=!showCollision;
   }
   if(e.which==32){
     gamePaused = !gamePaused;
   }
-  if(e.which==68){
-    //CHEAT! Warp to the top.
-    player.x = 50;
-    player.y = 50;
-    bigBad.y=100;
-    updateCamera();
-    fillFromMap();
+  if(debug){
+if(nextTimePrint){
+      nextTimePrint=false;
+      textOut("KeyCode:"+e.which);
+    }
+    if(e.which==27){
+      nextTimePrint=true;
+    }
+    //Cheat Keys!
+    if(e.which==68){
+      //CHEAT! Warp to the top.
+      player.x = 50;
+      player.y = 50;
+      bigBad.y=100;
+      updateCamera();
+      fillFromMap();
+    }
+    if(e.which==69){
+      //CHEAT! Warp to the Girlfriend.
+      player.x = girlfriend.x
+      player.y = girlfriend.y;
+      updateCamera();
+      fillFromMap();
+    }
+    if(e.which==70){
+      //CHEAT! Warp to the Bottom again.
+      player.x = 280;
+      player.y = 111*64;
+      updateCamera();
+      fillFromMap();
+    }
   }
-  if(e.which==69){
-    //CHEAT! Warp to the Girlfriend.
-    player.x = girlfriend.x
-    player.y = girlfriend.y;
-    updateCamera();
-    fillFromMap();
-  }
-  if(e.which==70){
-    //CHEAT! Warp to the Bottom again.
-    player.x = 280;
-    player.y = 111*64;
-    updateCamera();
-    fillFromMap();
-  }
-  return false;
 }
+
 keyUpHandler = function(e){
   keyMap[e.which]=false;
 }
