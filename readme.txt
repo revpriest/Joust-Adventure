@@ -48,11 +48,11 @@
 * For four pounds more I'll do level four, featuring:                               *
 * - The Cave Of Doom!                                                               *
 * - More meanies                                                                    *
-* - Locks and keys                                                                  *
 *                                                                                   *
 * For eight pounds more I'll do level five, featuring:                              *
 * - A Secret Revealed!                                                              *
 * - More code to enable narrative structure                                         *
+* - Locks and keys                                                                  *
 *                                                                                   *
 * And there's more to come, much of which is only very loosely planned right now,   *
 * but the pattern here is clear: increasing price for each subsequent level. There  *

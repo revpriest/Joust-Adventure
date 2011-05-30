@@ -1,5 +1,5 @@
 <?php 
-  $title = "Joust Adventure - Level Two";
+  $title = "Joust Adventure - Level Twenty";
   if(!isset($prefix)){$prefix="../vPre/";}
   $prefix="";
   require $prefix."header.php" 
@@ -7,18 +7,18 @@
     <link rel="stylesheet" media="screen" href="style.css" type="text/css" />
 
     <h1 id="loading">Joust</h1>
-    <h2 id="subtitle">Adventure - Level 2</h1>
+    <h2 id="subtitle">Adventure - Level 20</h1>
     <div id="joust">
-      <h1>Level Two - Rooftop Chase</h1>
+      <h1>Level Twenty - Title Witheld</h1>
       <h2>Donations Needed</h2>
-      <p>Thanks for playing Level One.</p>
-      <p>Level two features a daring rooftop chase across the city,
-         new meanies, and even SOUND EFFECTS!.</p>
+      <p>Thanks for playing previous levels.</p>
+      <p>The story continues in this next part</p>
+      <p>Featuring: More things! To be announced.</p>
       <p>It'll be released in the evening of the first Wednesday 
-         of next month, <b>if and only if</b>, our donations bucket
-         has received <b>&pound;1.00</b></p>
-      <p>That's right, just one person donates one pound and
-         <i>the whole world</i> can play level two.</p>
+         of the month after the previous level was released, <b>if and only if</b>, 
+         our donations bucket has received enough donations.</p>
+      <p>That's right, if people can chip in enough money to get
+         this project free, then the <i>the whole world</i> can play the next level.</p>
       <p>Subsequent levels will have more features, at higher
          costs. More narrative, multi-player abilities, sound
          effects, more graphics and exciting jousting gameplay.</p>
