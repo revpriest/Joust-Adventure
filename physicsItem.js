@@ -424,7 +424,12 @@ PhysicsItem.prototype.doStandardCollision = function(){
          }
        }
     }
-    if(this.collisionLeft!=null||this.collisionRight!=null){
+    if(this.collisionLeft!=null){
+       this.dx=-this.dx;
+       this.x = this.collisionLeft.x+this.collisionLeft.halfWidth+this.halfWidth;
+    }
+    if(this.collisionRight!=null){
+       this.x = this.collisionRight.x-this.collisionRight.halfWidth-this.halfWidth;
        this.dx=-this.dx;
     }
 }
