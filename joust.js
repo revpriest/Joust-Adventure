@@ -25,7 +25,7 @@ var frameNumber=0;
 var levelComplete=-1;
 var levelCompleteParticleSpeed = 3;
 var gamePaused = true;
-var debug = true;
+var debug = false;
 
 var map = new Array
           ("                    ",
