@@ -1,7 +1,7 @@
 <?php 
   $title = "Joust Adventure - Level One";
   if(!isset($prefix)){$prefix="../vPre/";}
-//  $prefix="";
+  $prefix="";
   require $prefix."header.php" 
 ?>
 
