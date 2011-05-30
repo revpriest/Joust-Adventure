@@ -13,7 +13,7 @@
       <h2>Donations Needed</h2>
       <p>Thanks for playing Level One.</p>
       <p>Level two features a daring rooftop chase across the city,
-         new meanies, and even SOUND EFFECTS!.</p>
+         pellet-dropping birds and SOUND EFFECTS!</p>
       <p>It'll be released in the evening of the first Wednesday 
          of next month, <b>if and only if</b>, our donations bucket
          has received <b>&pound;1.00</b></p>
