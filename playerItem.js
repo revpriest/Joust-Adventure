@@ -33,7 +33,7 @@ function PlayerItem(name,x,y,keyMap,direction){
   this.keyMap = keyMap;
   this.gotLance = false;
   this.noRemount=1;
-  this.particleSpeed=5;
+  this.particleSpeed=10;
   this.graphic = this.faceRightGraphic;
 }
 PlayerItem.prototype = new PhysicsItem();
@@ -295,11 +295,13 @@ PlayerItem.prototype.doLove = function(){
   if(this==girlfriend || this==player){
     if(girlfriend.distanceTo(player)<200){
       //Create a love icon
+      this.particleSpeed=6;
       var name = this.name+(new Date).getTime();
       addPhysicsItem (name, new ParticleItem(name,this.x,this.y,this.faceDirection,"heart"));
     }else{
       if(this==girlfriend){
         //Cry for help!
+        this.particleSpeed=10;
         addPhysicsItem (name, new ParticleItem(name,this.x,this.y,this.faceDirection,"help"));
       }
     }

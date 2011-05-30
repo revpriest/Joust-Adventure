@@ -10,8 +10,6 @@ of June. How much of it will get done? Have a weekend,
 and a bank holiday. During which I also have one
 all night party. So. We'll see.
 
-*) Better "Die" animation
-
 *) Ideally Spend some more time improving collision detection.
    God damn I hate collision detection. There's always
    some case that doesn't bloody work properly.
