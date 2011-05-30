@@ -4,11 +4,12 @@
 
 function ParrotItem(name,x,y,direction){
   this.init(name,x,y,direction);
+  this.animFrame=1;
+
   this.halfWidth = 30;
   this.halfHeight = 35;
   this.graphicsOffsetX = 13;
   this.graphicsOffsetY = 13;
-  this.animFrame=1;
   this.flyFramesR = [document.getElementById("ParrotFly1"),document.getElementById("ParrotFly2"),document.getElementById("ParrotFly3")];
   this.walkFramesR = [document.getElementById("ParrotStanding"),document.getElementById("ParrotWalk1"),document.getElementById("ParrotStanding"),document.getElementById("ParrotWalk2")];
   this.flyFramesL = [document.getElementById("ParrotFly1L"),document.getElementById("ParrotFly2L"),document.getElementById("ParrotFly3L")];
@@ -17,6 +18,7 @@ function ParrotItem(name,x,y,direction){
   this.walkFramesRW = [document.getElementById("ParrotStandingW"),document.getElementById("ParrotWalk1W"),document.getElementById("ParrotStandingW"),document.getElementById("ParrotWalk2W")];
   this.flyFramesLW = [document.getElementById("ParrotFly1LW"),document.getElementById("ParrotFly2LW"),document.getElementById("ParrotFly3LW")];
   this.walkFramesLW = [document.getElementById("ParrotStandingLW"),document.getElementById("ParrotWalk1LW"),document.getElementById("ParrotStandingLW"),document.getElementById("ParrotWalk2LW")];
+
   this.mortal = true;
   this.flyable = true;
   if(this.faceDirection==this.faceDirectionLeft){

@@ -13,6 +13,7 @@
     <script rel="javascript" src="lanceItem.js" type="text/javascript" ></script>
     <script rel="javascript" src="mapBlock.js" type="text/javascript" ></script>
     <script rel="javascript" src="parrotItem.js" type="text/javascript" ></script>
+    <script rel="javascript" src="crowItem.js" type="text/javascript" ></script>
     <script rel="javascript" src="playerItem.js" type="text/javascript" ></script>
     <script rel="javascript" src="meanieItem.js" type="text/javascript" ></script>
     <script rel="javascript" src="bigBadItem.js" type="text/javascript" ></script>
@@ -69,6 +70,32 @@
       <img src="images/SilverbackWalk2L.png" id="SilverbackWalk2L" width="10" height="1"/>
       <img src="images/SilverbackWalk3L.png" id="SilverbackWalk3L" width="10" height="1"/>
       <img src="images/SilverbackWalk4L.png" id="SilverbackWalk4L" width="10" height="1"/>
+    </div><div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
+      <img src="images/CrowStand.png" id="CrowStand" width="10" height="1"/>
+      <img src="images/CrowWalk1.png" id="CrowWalk1" width="10" height="1"/>
+      <img src="images/CrowWalk2.png" id="CrowWalk2" width="10" height="1"/>
+      <img src="images/CrowFly1.png" id="CrowFly1" width="10" height="1"/>
+      <img src="images/CrowFly2.png" id="CrowFly2" width="10" height="1"/>
+      <img src="images/CrowFly3.png" id="CrowFly3" width="10" height="1"/>
+      <img src="images/CrowStandL.png" id="CrowStandL" width="10" height="1"/>
+      <img src="images/CrowWalk1L.png" id="CrowWalk1L" width="10" height="1"/>
+      <img src="images/CrowWalk2L.png" id="CrowWalk2L" width="10" height="1"/>
+      <img src="images/CrowFly1L.png" id="CrowFly1L" width="10" height="1"/>
+      <img src="images/CrowFly2L.png" id="CrowFly2L" width="10" height="1"/>
+      <img src="images/CrowFly3L.png" id="CrowFly3L" width="10" height="1"/>
+    </div><div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
+      <img src="images/CrowStandW.png" id="CrowStandW" width="10" height="1"/>
+      <img src="images/CrowWalk1W.png" id="CrowWalk1W" width="10" height="1"/>
+      <img src="images/CrowWalk2W.png" id="CrowWalk2W" width="10" height="1"/>
+      <img src="images/CrowFly1W.png" id="CrowFly1W" width="10" height="1"/>
+      <img src="images/CrowFly2W.png" id="CrowFly2W" width="10" height="1"/>
+      <img src="images/CrowFly3W.png" id="CrowFly3W" width="10" height="1"/>
+      <img src="images/CrowStandLW.png" id="CrowStandLW" width="10" height="1"/>
+      <img src="images/CrowWalk1LW.png" id="CrowWalk1LW" width="10" height="1"/>
+      <img src="images/CrowWalk2LW.png" id="CrowWalk2LW" width="10" height="1"/>
+      <img src="images/CrowFly1LW.png" id="CrowFly1LW" width="10" height="1"/>
+      <img src="images/CrowFly2LW.png" id="CrowFly2LW" width="10" height="1"/>
+      <img src="images/CrowFly3LW.png" id="CrowFly3LW" width="10" height="1"/>
     </div><div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
       <img src="images/ParrotStanding.png" id="ParrotStanding" width="10" height="1"/>
       <img src="images/ParrotWalk1.png" id="ParrotWalk1" width="10" height="1"/>

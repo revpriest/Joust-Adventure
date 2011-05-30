@@ -9,7 +9,7 @@ function SentinelItem(name,x,y,direction){
 
   this.flyingHalfWidth = 35;
   this.flyingHalfHeight = 49;
-  this.flyingOffsetX = 0;
+  this.flyingOffsetX = -5;
   this.flyingOffsetY = 0;
   this.runningHalfWidth = 25;
   this.runningHalfHeight = 30;

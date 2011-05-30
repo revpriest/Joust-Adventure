@@ -10,8 +10,6 @@ of June. How much of it will get done? Have a weekend,
 and a bank holiday. During which I also have one
 all night party. So. We'll see.
 
-*) New graphics for big-bad, make him an alien on a crow.
-
 *) Better "Die" animation
 
 *) Ideally Spend some more time improving collision detection.

@@ -12,7 +12,7 @@ BigBadItem = function(name,x,y,direction){
   this.runningOffsetX = 15;
   this.runningOffsetY = 18;
   this.flyingOffsetX = 5;
-  this.flyingOffsetY = 10;
+  this.flyingOffsetY = 15;
   this.sitRightGraphic = document.getElementById("AlienSit") ;
   this.sitLeftGraphic = document.getElementById("AlienSitL");
   this.faceRightGraphic = document.getElementById("AlienStand") ;
@@ -37,7 +37,7 @@ BigBadItem = function(name,x,y,direction){
   this.neverRemove = true;
 
   //big bad has a mount. Basically always.
-  var p = addPhysicsItem(this.name+"mount",new ParrotItem(this.mount+"mount",this.x,this.y,this.faceDirection)) 
+  var p = addPhysicsItem(this.name+"mount",new CrowItem(this.mount+"mount",this.x,this.y,this.faceDirection)) 
   this.fly(p);
   this.getLance();
   this.mode = this.mode_wait;
@@ -73,8 +73,8 @@ BigBadItem.prototype.doAi = function(){
         }
     }else if(this.mode == this.mode_kidnapGirlfriend){
       this.seek(500,player.y-screenHeight-50);
-      g.x = this.x;
-      g.y = this.y+this.halfHeight*2;
+      g.x = this.x+10;
+      g.y = this.y+this.halfHeight*2-10;
       g.dx=this.dx;
       g.dy=this.dy; 
     }
