@@ -24,6 +24,7 @@ var pi = PhysicsItem.prototype;
 var frameNumber=0;
 var levelComplete=false;
 var levelCompleteParticleSpeed = 4;
+var gamePaused = false;
 
 var map = new Array
           ("                  ! ",
@@ -129,9 +130,9 @@ var map = new Array
            "    p    s          ",
            "<ZZZZZZZZ>          ",
            "    s            l  ",
-           "                 ^  ",
-           "       S         N  ",
-           "           s     N  ",
+           "       S         ^  ",
+           "                 N  ",
+           "              s  N  ",
            "                 N  ",
            "                 N  ",
            "      <ZZZZZZ>   N  ",
@@ -196,31 +197,22 @@ function updateCamera(){
 * time a second, we're gonna be slow. So keep the code FAST.
 */
 function runGame(){
-  frameNumber++;
-  var n=0;
-  for (var i in physicsItems){
-     var item = physicsItems[i];
-     item.updatePosition();
-     if(item.dying){
-       item.dying--;
-       if(item.dying==1){
-         delete physicsItems[i];
-       }
+  if(!gamePaused){
+    frameNumber++;
+    var n=0;
+    for (var i in physicsItems){
+       var item = physicsItems[i];
+       item.updatePosition();
+       if(item.dying){
+         item.dying--;
+         if(item.dying==1){
+           delete physicsItems[i];
+         }
+      }
+      n++;
     }
-    n++;
+    checkForLevelEnd();
   }
-  checkForLevelEnd();
-
-  //Debug Printing.
-//  dist = "Not Both In Game";
-//  dist2 = "Not Both In Game";
-//  if(player && girlfriend){
-//    var dist = Math.floor(player.distanceTo(girlfriend));
-//  }
-//  if(player && bigBad){
-//    var dist2 = Math.floor(player.distanceTo(bigBad));
-//  }
-//  debugPrint("Frame: "+frameNumber+" Items:"+n+"  Distance:"+dist+"   Bad:"+dist2);
   var oldX=cameraX;
   var oldY=cameraY;
   updateCamera();
@@ -228,6 +220,10 @@ function runGame(){
   deleteDistantObjects(player);
   if(showCollision){
     showCollisionLines();
+  }
+  if(gamePaused){
+    //Draw a "Click To Play" graphic somewhere
+    drawGraphic(document.getElementById("clickToPlay"),screenWidth/2-230,screenHeight/2-35);
   }
 }
 
@@ -297,8 +293,13 @@ keyUpHandler = function(e){
   keyMap[e.which]=false;
 }
 mouseDownHandler = function(e){
-  if(levelComplete){
-    document.location = nextLevel;
+  if(e.target == document.getElementById("gameCanvas")){
+    gamePaused = !gamePaused;
+    if(levelComplete){
+      document.location = nextLevel;
+    }
+  }else{
+    gamePaused = true;
   }
 }
 
@@ -531,9 +532,11 @@ function addNewMapBlocks(cx,cy,ox,oy){
 function start(){
   //Stop keys scrolling the page.
   document.onkeydown = function(e) {
-    var k = e.keyCode;
-    if(k >= 37 && k <= 40) {
-        return false;
+    if(!gamePaused){
+      var k = e.keyCode;
+      if(k >= 37 && k <= 40) {
+          return false;
+      }
     }
   }
   player = addPhysicsItem('player',new PlayerItem("player",280,111*64+11,keyMap,pi.faceDirectionRight));

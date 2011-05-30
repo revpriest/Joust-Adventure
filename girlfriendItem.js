@@ -23,6 +23,7 @@ GirlfriendItem = function(name,x,y,direction){
   this.keyMap = [];
   this.friendlyFireCode = 1;    //Can't kill things with the same Friendly Fire code as you.
   this.neverRemove = true;
+  this.graphic = this.faceLeftGraphic;
 }
 GirlfriendItem.prototype = new PlayerItem();
 

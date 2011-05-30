@@ -4,16 +4,28 @@
 
 BigBadItem = function(name,x,y,direction){
   this.init(name,x,y,direction);
-  this.halfWidth = 25;
-  this.halfHeight = 30;
-  this.graphicsOffsetX = 15;
-  this.graphicsOffsetY = 10;
-  this.faceRightGraphic = document.getElementById("BaboonStand") ;
-  this.faceLeftGraphic = document.getElementById("BaboonStandL");
-  this.faceRightJumpGraphic = document.getElementById("BaboonJump") ;
-  this.faceLeftJumpGraphic = document.getElementById("BaboonJumpL");
-  this.walkAnimFrames =  [document.getElementById("BaboonWalk1") ,document.getElementById("BaboonWalk2") ,document.getElementById("BaboonWalk3") ,document.getElementById("BaboonWalk4") ];
-  this.walkAnimFramesL = [document.getElementById("BaboonWalk1L"),document.getElementById("BaboonWalk2L"),document.getElementById("BaboonWalk3L"),document.getElementById("BaboonWalk4L")];
+
+  this.flyingHalfWidth = 35;
+  this.flyingHalfHeight = 49;
+  this.runningHalfWidth = 25;
+  this.runningHalfHeight = 30;
+  this.runningOffsetX = 15;
+  this.runningOffsetY = 18;
+  this.flyingOffsetX = 5;
+  this.flyingOffsetY = 10;
+  this.sitRightGraphic = document.getElementById("AlienSit") ;
+  this.sitLeftGraphic = document.getElementById("AlienSitL");
+  this.faceRightGraphic = document.getElementById("AlienStand") ;
+  this.faceLeftGraphic = document.getElementById("AlienStandL");
+  this.faceRightJumpGraphic = document.getElementById("AlienJump") ;
+  this.faceLeftJumpGraphic = document.getElementById("AlienJumpL");
+  this.walkAnimFrames =  [document.getElementById("AlienWalk1") ,document.getElementById("AlienStand") ,document.getElementById("AlienWalk2") ,document.getElementById("AlienStand") ];
+  this.walkAnimFramesL = [document.getElementById("AlienWalk1L"),document.getElementById("AlienStandL"),document.getElementById("AlienWalk2L"),document.getElementById("AlienStandL")];
+
+  this.halfWidth = this.runningHalfWidth;
+  this.halfHeight = this.runningHalfHeight;
+  this.graphicsOffsetY = this.runningOffsetY;
+  this.graphicsOffsetX = this.runningOffsetX;
   this.delayFrames=0;
   this.animFrame=1;
   this.mortal = false;

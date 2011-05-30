@@ -4,17 +4,28 @@
 
 function PlayerItem(name,x,y,keyMap,direction){
   this.init(name,x,y,direction);
-  this.halfWidth = 25;
-  this.halfHeight = 30;
-  this.graphicsOffsetX = 15;
-  this.graphicsOffsetY = 0;
-  this.invulnerable = 0;
+
+  this.flyingHalfWidth = 35;
+  this.flyingHalfHeight = 49;
+  this.flyingOffsetX = 0;
+  this.flyingOffsetY = 0;
+  this.runningHalfWidth = 25;
+  this.runningHalfHeight = 30;
+  this.runningOffsetX = 15;
+  this.runningOffsetY = 0;
   this.faceRightGraphic = document.getElementById("SilverbackStand") ;
   this.faceLeftGraphic = document.getElementById("SilverbackStandL");
+  this.sitRightGraphic = document.getElementById("SilverbackStand") ;
+  this.sitLeftGraphic = document.getElementById("SilverbackStandL");
   this.faceRightJumpGraphic = document.getElementById("SilverbackJump") ;
   this.faceLeftJumpGraphic = document.getElementById("SilverbackJumpL");
   this.walkAnimFrames =  [document.getElementById("SilverbackWalk1") ,document.getElementById("SilverbackWalk2") ,document.getElementById("SilverbackWalk3") ,document.getElementById("SilverbackWalk4") ];
   this.walkAnimFramesL = [document.getElementById("SilverbackWalk1L"),document.getElementById("SilverbackWalk2L"),document.getElementById("SilverbackWalk3L"),document.getElementById("SilverbackWalk4L")];
+
+  this.halfWidth = this.runningHalfWidth;
+  this.halfHeight = this.runningHalfHeight;
+  this.graphicsOffsetY = this.runningOffsetY;
+  this.graphicsOffsetX = this.runningOffsetX;
   this.delayFrames=0;
   this.animFrame=1;
   this.mortal = true;
@@ -23,6 +34,7 @@ function PlayerItem(name,x,y,keyMap,direction){
   this.gotLance = false;
   this.noRemount=1;
   this.particleSpeed=5;
+  this.graphic = this.faceRightGraphic;
 }
 PlayerItem.prototype = new PhysicsItem();
 PlayerItem.prototype.keyDown = 40;
@@ -74,13 +86,13 @@ PlayerItem.prototype.doAnimation = function(){
     }else{
       if((this.dx<0)||((this.dx==0)&&(this.faceDirection==this.faceDirectionLeft))){
         this.faceDirection=this.faceDirectionLeft;
-        this.graphic = this.faceLeftGraphic;
+        this.graphic = this.sitLeftGraphic;
         if(this.flying){
           this.flying.faceDirection = this.faceDirectionLeft;
         }
       }else if((this.dx>0)||((this.dx==0)&&(this.faceDirection==this.faceDirectionRight))){
         this.faceDirection=this.faceDirectionRight;
-        this.graphic = this.faceRightGraphic;
+        this.graphic = this.sitRightGraphic;
         if(this.flying){
           this.flying.faceDirection = this.faceDirectionRight;
         }
@@ -130,10 +142,10 @@ PlayerItem.prototype.getLance = function(){
 PlayerItem.prototype.fly = function(flyableItem){
   this.flying=flyableItem;
   flyableItem.pilot = this;
-  this.halfWidth = 35
-  this.halfHeight = 49;
-  this.graphicsOffsetX = 0;
-  this.graphicsOffsetY = 0;
+  this.halfWidth = this.flyingHalfWidth 
+  this.halfHeight = this.flyingHalfHeight;
+  this.graphicsOffsetX = this.flyingOffsetX;
+  this.graphicsOffsetY = this.flyingOffsetY;
   this.faceDirection = flyableItem.faceDirection;
 }
 
@@ -247,10 +259,10 @@ PlayerItem.prototype.ditchBird = function(){
    this.invulnerable=10;
    this.flying.pilot = null;
    this.flying=null;
-   this.halfWidth = 25;
-   this.halfHeight = 30;
-   this.graphicsOffsetX = 15;
-   this.graphicsOffsetY = 0;
+   this.halfWidth = this.runningHalfWidth;
+   this.halfHeight = this.runningHalfHeight;
+   this.graphicsOffsetX = this.runningOffsetX;
+   this.graphicsOffsetY = this.runningOffsetY;
    if(this.gotLance){
      this.gotLance=false;
 //     addPhysicsItem(null,new LanceItem("lance"+this.maxObjInt,this.x,this.y))

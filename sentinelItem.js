@@ -6,16 +6,28 @@
 
 function SentinelItem(name,x,y,direction){
   this.init(name,x,y);
-  this.halfWidth = 25;
-  this.halfHeight = 30;
-  this.graphicsOffsetX = 15;
-  this.graphicsOffsetY = 10;
+
+  this.flyingHalfWidth = 35;
+  this.flyingHalfHeight = 49;
+  this.flyingOffsetX = 0;
+  this.flyingOffsetY = 0;
+  this.runningHalfWidth = 25;
+  this.runningHalfHeight = 30;
+  this.runningOffsetX = 15;
+  this.runningOffsetY = 0;
   this.faceRightGraphic = document.getElementById("BaboonStand") ;
   this.faceLeftGraphic = document.getElementById("BaboonStandL");
+  this.sitRightGraphic = document.getElementById("BaboonStand") ;
+  this.sitLeftGraphic = document.getElementById("BaboonStandL");
   this.faceRightJumpGraphic = document.getElementById("BaboonJump") ;
   this.faceLeftJumpGraphic = document.getElementById("BaboonJumpL");
   this.walkAnimFrames =  [document.getElementById("BaboonWalk1") ,document.getElementById("BaboonWalk2") ,document.getElementById("BaboonWalk3") ,document.getElementById("BaboonWalk4") ];
   this.walkAnimFramesL = [document.getElementById("BaboonWalk1L"),document.getElementById("BaboonWalk2L"),document.getElementById("BaboonWalk3L"),document.getElementById("BaboonWalk4L")];
+
+  this.halfWidth = this.runningHalfWidth;
+  this.halfHeight = this.runningHalfHeight;
+  this.graphicsOffsetY = this.runningOffsetY;
+  this.graphicsOffsetX = this.runningOffsetX;
   this.delayFrames=0;
   this.animFrame=1;
   this.mortal = true;

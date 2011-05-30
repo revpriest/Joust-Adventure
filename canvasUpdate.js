@@ -31,6 +31,9 @@ function drawItems(){
   }
 }
 
+function drawGraphic(g,x,y){
+  gameCanvasContext.drawImage(g,x,y);
+}
 
 function drawItem(i){
    try{

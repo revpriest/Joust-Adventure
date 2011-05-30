@@ -14,8 +14,6 @@ all night party. So. We'll see.
 
 *) Better "Die" animation
 
-*) Ideally more balloon graphics/colours
-
 *) Ideally Spend some more time improving collision detection.
    God damn I hate collision detection. There's always
    some case that doesn't bloody work properly.

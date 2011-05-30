@@ -1,7 +1,7 @@
 <?php 
   $title = "Joust Adventure - Level One";
   if(!isset($prefix)){$prefix="../vPre/";}
-  $prefix="";
+//  $prefix="";
   require $prefix."header.php" 
 ?>
 
@@ -25,6 +25,7 @@
     <div id="joust">
       <canvas width="800" height="500" id="gameCanvas">
     </div>
+    <p><a href="http://en.wikipedia.org/wiki/Copyright">Copyright</a> <a href="http://en.wikipedia.org/wiki/2011">2011</a> <a href="http://dalliance.net/">Adam Priest</a> - <a href="http://www.gnu.org/licenses/gpl.html">GPL Licenced</a> - <a href="https://github.com/revpriest/Joust-Adventure">Source Code Available</a>.</p>
     <p id="stringy"></p>
     <div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
       <img src="images/BaboonStand.png" id="BaboonStand" width="10" height="1"/>
@@ -44,6 +45,17 @@
       <img src="images/PinkMonkeyJump.png" id="PinkMonkeyJump" width="10" height="1"/>
       <img src="images/PinkMonkeyStandL.png" id="PinkMonkeyStandL" width="10" height="1"/>
       <img src="images/PinkMonkeyJumpL.png" id="PinkMonkeyJumpL" width="10" height="1"/>
+    </div><div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
+      <img src="images/AlienStand.png" id="AlienStand" width="10" height="1"/>
+      <img src="images/AlienSit.png" id="AlienSit" width="10" height="1"/>
+      <img src="images/AlienJump.png" id="AlienJump" width="10" height="1"/>
+      <img src="images/AlienWalk1.png" id="AlienWalk1" width="10" height="1"/>
+      <img src="images/AlienWalk2.png" id="AlienWalk2" width="10" height="1"/>
+      <img src="images/AlienStandL.png" id="AlienStandL" width="10" height="1"/>
+      <img src="images/AlienSitL.png" id="AlienSitL" width="10" height="1"/>
+      <img src="images/AlienJumpL.png" id="AlienJumpL" width="10" height="1"/>
+      <img src="images/AlienWalk1L.png" id="AlienWalk1L" width="10" height="1"/>
+      <img src="images/AlienWalk2L.png" id="AlienWalk2L" width="10" height="1"/>
     </div><div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
       <img src="images/SilverbackStand.png" id="SilverbackStand" width="10" height="1"/>
       <img src="images/SilverbackJump.png" id="SilverbackJump" width="10" height="1"/>
@@ -104,6 +116,7 @@
       <img src="images/Heart.png" id="heart" width="10"  height="1"/>
       <img src="images/Help.png" id="help" width="10"  height="1"/>
       <img src="images/LevelComplete.png" id="levelComplete" width="10"  height="1"/>
+      <img src="images/ClickToPlay.png" id="clickToPlay" width="10"  height="1"/>
     </div>
 
 <?php require $prefix."footer.php" ?>
