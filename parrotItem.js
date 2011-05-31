@@ -32,8 +32,6 @@ function ParrotItem(name,x,y,direction){
   this.friendlyFireCode = 1;    //Can't kill things with the same Friendly Fire code as you.
 }
 ParrotItem.prototype = new PhysicsItem();
-ParrotItem.prototype.faceDirectionLeft = 1;
-ParrotItem.prototype.faceDirectionRight = 2;
 
 
 /******************************************************
@@ -111,8 +109,20 @@ ParrotItem.prototype.doAnimation = function(){
         }
       }
     }
-    if((this.dx<0)||((this.dx==0)&&(this.faceDirection==this.faceDirectionLeft))){
-      this.faceDirection=this.faceDirectionLeft;
+
+    //Set faceDirection based on direction or pilot's direction
+    if(!this.pilot){
+      if(this.dx<0){
+        this.faceDirection=this.faceDirectionLeft;
+      }else {
+        this.faceDirection=this.faceDirectionRight;
+      }
+    }else{
+      this.faceDireciton=this.pilot.faceDireciton;
+    }
+
+    //Set frames based on face direction.
+    if(this.faceDirection==this.faceDirectionLeft){
       if(this.collisionBottom){
         this.graphic = this.walkFramesL[this.animFrame];
         this.wingGraphic = this.walkFramesLW[this.animFrame];
@@ -120,8 +130,7 @@ ParrotItem.prototype.doAnimation = function(){
         this.graphic = this.flyFramesL[this.animFrame];
         this.wingGraphic = this.flyFramesLW[this.animFrame];
       }
-    }else if((this.dx>0)||((this.dx==0)&&(this.faceDirection==this.faceDirectionRight))){
-      this.faceDirection=this.faceDirectionRight;
+    }else{
       if(this.collisionBottom){
         this.graphic = this.walkFramesR[this.animFrame];
         this.wingGraphic = this.walkFramesRW[this.animFrame];
