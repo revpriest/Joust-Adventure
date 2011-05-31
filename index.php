@@ -23,8 +23,21 @@
     </div>
     <div id="joust">
       <canvas width="800" height="500" id="gameCanvas">
+        <h1>Old Browser</h1>
+        <p>Sorry, this is a HTML 5 game and your browser is too
+           old or incompatible to use the &lt;canvas&gt; element.</p>
+        <p>Try using the latest version of <a href="http://www.mozilla.com/en-US/firefox/new/">Firefox</a>, 
+           <a href="http://www.google.com/chrome/">Chrome</a>,
+           <a href="http://www.apple.com/safari/">Safari</a>,
+           or even <a href="http://www.opera.com/">Opera</a> 
+           (though it seems a bit slow and rubbish on Opera).</p>
+           <p>I'm told it might work on IE9, but I don't have a windows 
+           machine so I can't tell. Let me know (though if it's working I 
+           guess you can't see this)</p>
+      </canvas>
     </div>
     <p><a href="http://en.wikipedia.org/wiki/Copyright">Copyright</a> <a href="http://en.wikipedia.org/wiki/2011">2011</a> <a href="http://dalliance.net/">Adam Priest</a> - <a href="http://www.gnu.org/licenses/gpl.html">GPL Licenced</a> - <a href="https://github.com/revpriest/Joust-Adventure">Source Code Available</a>.</p>
+    <p>If it seems slow, try updating your browser. This years browsers have much faster javascript execution.</p>
     <p id="stringy"></p>
     <p id="complete">0% complete</p>
     <div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
