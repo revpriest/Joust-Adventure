@@ -217,8 +217,8 @@ function runGame(){
       }
       n++;
     }
-    checkForLevelEnd();
   }
+  checkForLevelEnd();
   var oldX=cameraX;
   var oldY=cameraY;
   updateCamera();
