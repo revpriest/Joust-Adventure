@@ -45,6 +45,19 @@ h2#subtitle{
   left: 570px;
   color: #fff;
 }
+#complete{
+  font-size: 0.8em;
+  font-family: Impact, sans-serif;
+  font-weight: normal;
+  text-shadow: 3px 3px 5px black;
+  color: white;
+  position: absolute;
+  top:120px;
+  left:100px;
+  width: 100%;
+  text-align:left;
+  z-index: 140;
+}
 #stringy {
   font-size: 3em;
   font-family: Impact, sans-serif;

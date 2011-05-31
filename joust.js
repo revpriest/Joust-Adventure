@@ -26,6 +26,7 @@ var levelComplete=-1;
 var levelCompleteParticleSpeed = 3;
 var gamePaused = true;
 var debug = false;
+var completePercent = 0;
 
 var map = new Array
           ("                    ",
@@ -159,6 +160,10 @@ function textOut(s){
   var e = document.getElementById("stringy");
   e.innerHTML = s;
 }
+function completeText(s){
+  var e = document.getElementById("complete");
+  e.innerHTML = s;
+}
 
 
 /******************************************************
@@ -234,11 +239,15 @@ function checkForLevelEnd(){
     textOut("Click To Continue");
   }
   if(levelComplete>-1){
+    completeText("100% complete");
     if(frameNumber%levelCompleteParticleSpeed==0){
       name=this.name+(new Date).getTime()+"LC";
       addPhysicsItem (name, new ParticleItem(name,cameraX+screenWidth/2-110,cameraY+screenHeight/2,this.faceDirection,"levelComplete")).background=false;
     }
   }else{
+    var currentComplete = Math.floor((((111*64+11-150)-(player.y-150))/(111*64+11-150))*100);
+    if((currentComplete>completePercent)&&(currentComplete<=99)){completePercent=currentComplete};
+    completeText(""+completePercent+"% complete");
     if(player){
       if(player.y<150){
         if(girlfriend.distanceTo(player)<200){

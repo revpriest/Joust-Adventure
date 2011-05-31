@@ -28,6 +28,7 @@
     </div>
     <p><a href="http://en.wikipedia.org/wiki/Copyright">Copyright</a> <a href="http://en.wikipedia.org/wiki/2011">2011</a> <a href="http://dalliance.net/">Adam Priest</a> - <a href="http://www.gnu.org/licenses/gpl.html">GPL Licenced</a> - <a href="https://github.com/revpriest/Joust-Adventure">Source Code Available</a>.</p>
     <p id="stringy"></p>
+    <p id="complete">0% complete</p>
     <div style="position:absolute;top:0px;left:0px;width:1px;height:1px;visibility:hidden">
       <img src="images/BaboonStand.png" id="BaboonStand" width="10" height="1"/>
       <img src="images/BaboonJump.png" id="BaboonJump" width="10" height="1"/>

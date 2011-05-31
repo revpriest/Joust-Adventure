@@ -91,16 +91,11 @@ PlayerItem.prototype.doAnimation = function(){
       if((this.dx<0)||((this.dx==0)&&(this.faceDirection==this.faceDirectionLeft))){
         this.faceDirection=this.faceDirectionLeft;
         this.graphic = this.sitLeftGraphic;
-        if(this.flying){
-          this.flying.faceDirection = this.faceDirectionLeft;
-        }
       }else if((this.dx>0)||((this.dx==0)&&(this.faceDirection==this.faceDirectionRight))){
         this.faceDirection=this.faceDirectionRight;
         this.graphic = this.sitRightGraphic;
-        if(this.flying){
-          this.flying.faceDirection = this.faceDirectionRight;
-        }
       }
+      this.flying.faceDirection = this.faceDirectionLeft;
     }
   }
   if(this.oldFaceDirection!=this.faceDirection){
