@@ -5,7 +5,7 @@
     <link rel="stylesheet" media="screen" href="style.css" type="text/css" />
 
     <h1 id="loading">Joust</h1>
-    <h2 id="subtitle">Adventure - Level 19</h1>
+    <h2 id="subtitle">Adventure - Level 19</h2>
     <div id="joust">
       <h1>Level Nineteen - Title Witheld</h1>
       <h2>Donations Needed</h2>
