@@ -28,6 +28,10 @@ var gamePaused = true;
 var debug = false;
 var completePercent = 0;
 
+if(location.search=="?debug=true"){
+  debug=true;
+}
+
 var map = new Array
           ("                    ",
            "                    ",
@@ -246,7 +250,8 @@ function checkForLevelEnd(){
     }
   }else{
     var currentComplete = Math.floor((((111*64+11-150)-(player.y-150))/(111*64+11-150))*100);
-    if((currentComplete>completePercent)&&(currentComplete<=99)){completePercent=currentComplete};
+    if(currentComplete>99){currentComplete=99;}
+    if(currentComplete>completePercent){completePercent=currentComplete};
     completeText(""+completePercent+"% complete");
     if(player){
       if(player.y<150){
