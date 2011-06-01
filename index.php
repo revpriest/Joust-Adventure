@@ -36,6 +36,8 @@
            guess you can't see this)</p>
       </canvas>
     </div>
+    <p>Use the cursor keys to move the monkey. Collect yourself a parrot, and
+       a stick, and start jousting to the rescue. In head-on collisions, highest joust wins.</p>
     <p><a href="http://en.wikipedia.org/wiki/Copyright">Copyright</a> <a href="http://en.wikipedia.org/wiki/2011">2011</a> <a href="http://dalliance.net/">Adam Priest</a> - <a href="http://www.gnu.org/licenses/gpl.html">GPL Licenced</a> - <a href="https://github.com/revpriest/Joust-Adventure">Source Code Available</a>.</p>
     <p>If it seems slow, try updating your browser. This years browsers have much faster javascript execution.</p>
     <p id="stringy"></p>
